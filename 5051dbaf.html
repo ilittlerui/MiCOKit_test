@@ -48,6 +48,9 @@
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="led_on">On</a><a class="button" style="background:black; color:white" id="led_off">Off</a>
 			</div>
+			<div class="button-bar">
+				<a class="button" style="background:white; color:black" id="zcb_init">Init ZigBee Network</a><a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
+			</div>
 		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 		<script>
@@ -87,7 +90,8 @@
 				// Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
 				var wsbroker = "api.easylink.io";
 				//mqtt websocket enabled broker
-				var wsport = 1983;// port for above
+				var wsport = 1983;
+				// port for above
 				var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 12));
 
 				// 基本参数配置
