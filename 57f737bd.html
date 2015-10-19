@@ -2,15 +2,16 @@
   product id: 57f737bd
   product name: MiCOKit-3165-demo_wechat_rgbled
 -->
-
 <!DOCTYPE html>
 <html ng-app="ionicApp">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-<title>MiCOKit</title>
-<link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
-<style>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>MiCOKit</title>
+    <link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet" />
+    <style>
 #debug {
     margin-top:44px;
     background-color: white;
@@ -32,40 +33,44 @@
     margin-bottom: 2px;
 }
 </style>
-</head>
-<body>
-<div class="bar bar-header bar-assertive">
-  <h1 class="title" id="device_id"></h1>
-</div>
-<div id="debug"></div>
-
-<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
-	<div class="button-bar">
-	  <a class="button" style="background:red; color:white" id="led_red">Red</a>
-	  <a class="button" style="background:green; color:white" id="led_green">Green</a>
-	  <a class="button" style="background:blue; color:white" id="led_blue">Blue</a>
-	</div>
-	<div class="button-bar">
-	  <a class="button" style="background:white; color:black" id="led_on">On</a>
-	  <a class="button" style="background:black; color:white" id="led_off">Off</a>
-	</div>
-</div>
-
-<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
-<script>
+  </head>
+  <body>
+  <div class="bar bar-header bar-assertive">
+    <h1 class="title" id="device_id"></h1>
+  </div>
+  <div id="debug"></div>
+  <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+    <div class="button-bar">
+    <a class="button" style="background:red; color:white" id="led_red">Red</a> 
+    <a class="button" style="background:green; color:white" id="led_green">Green</a> 
+    <a class="button" style="background:blue; color:white" id="led_blue">Blue</a></div>
+    <div class="button-bar">
+    <a class="button" style="background:white; color:black" id="led_on">On</a> 
+    <a class="button" style="background:black; color:white" id="led_off">Off</a></div>
+  </div>
+  <script src="http://api.easylink.io/assets/js/mqttws31.js"></script> 
+  <script>
 function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    var match = RegExp(&amp;amp;amp;amp;amp;amp;#39;[?&amp;amp;amp;amp;amp;amp;amp;]&amp;amp;amp;amp;amp;amp;#39; + name +
+&amp;amp;amp;amp;amp;amp;#39;=([^&amp;amp;amp;amp;amp;amp;amp;]*)&amp;amp;amp;amp;amp;amp;#39;).exec(window.location.search);
+    return match &amp;amp;amp;amp;amp;amp;amp;&amp;amp;amp;amp;amp;amp;amp; decodeURIComponent(match[1].replace(/\+/g,
+&amp;amp;amp;amp;amp;amp;#39;
+&amp;amp;amp;amp;amp;amp;#39;));
 }
-var device_id = getParameterByName('device_id');
+var device_id = getParameterByName(&amp;amp;amp;amp;amp;amp;#39;device_id&amp;amp;amp;amp;amp;amp;#39;);
 if ( device_id !== null ){
     ez_connect(device_id);
 }
 
 function dump_obj(myObject) {
-    var s = '';
+    var s = &amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;#39;;
     for (var property in myObject) {
-        s += '<span>' + property +": " + myObject[property] + '</span>';
+        s += &amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;span&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;
++ property
++&amp;amp;amp;amp;amp;amp;quot;:
+&amp;amp;amp;amp;amp;amp;quot; + myObject[property]
++
+&amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;\/span&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;;
     }
     return s;
 }
@@ -74,31 +79,38 @@ var i = 0;
 console.log = (function(old_funct, div_log) {
     return function(text) {
         old_funct(text);
-        var p = '';
+        var p = &amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;#39;;
         if (i%2 == 0)
-            p = '<p>';
+            p =
+&amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;p&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;;
         else
-            p = '<p class=\'gray\'>';
+            p = &amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;p
+class=\&amp;amp;amp;amp;amp;amp;#39;gray\&amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;;
 
-        if (typeof text === "object")
-            div_log.innerHTML += p + JSON.stringify(text) + '</p>';
+        if (typeof text === &amp;amp;amp;amp;amp;amp;quot;object&amp;amp;amp;amp;amp;amp;quot;)
+            div_log.innerHTML += p + JSON.stringify(text) +
+&amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;\/p&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;;
         else
-            div_log.innerHTML += p + text + '</p>';
+            div_log.innerHTML += p + text +
+&amp;amp;amp;amp;amp;amp;#39;&amp;amp;amp;amp;amp;amp;lt;\/p&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;#39;;
 
         div_log.scrollTop = div_log.scrollHeight;
         i += 1;
     };
-} (console.log.bind(console), document.getElementById("debug")));
+} (console.log.bind(console), document.getElementById(&amp;amp;amp;amp;amp;amp;quot;debug&amp;amp;amp;amp;amp;amp;quot;)));
 console.error = console.debug = console.info =  console.log
 
 function ez_connect(device_id) {
-    var access_token = getParameterByName('access_token');
+    var access_token = getParameterByName(&amp;amp;amp;amp;amp;amp;#39;access_token&amp;amp;amp;amp;amp;amp;#39;);
 
-    document.getElementById('device_id').innerHTML = device_id;
+    document.getElementById(&amp;amp;amp;amp;amp;amp;#39;device_id&amp;amp;amp;amp;amp;amp;#39;).innerHTML = device_id;
 
-    var wsbroker = "api.easylink.io";  //mqtt websocket enabled broker
+    var wsbroker = &amp;amp;amp;amp;amp;amp;quot;api.easylink.io&amp;amp;amp;amp;amp;amp;quot;;  //mqtt websocket enabled broker
     var wsport = 1983 // port for above
-    var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 10));
+    var client = new Paho.MQTT.Client(wsbroker, wsport, &amp;amp;amp;amp;amp;amp;quot;v1-web-&amp;amp;amp;amp;amp;amp;quot; +
+parseInt(Math.random() *
+1000000,
+10));
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
@@ -111,58 +123,90 @@ function ez_connect(device_id) {
             message.destinationName = topic;
             client.send(message);
         }
-        console.log("App connected!");
-        client.subscribe(device_id+'/out/#', {qos: 0});
+        console.log(&amp;amp;amp;amp;amp;amp;quot;App connected!&amp;amp;amp;amp;amp;amp;quot;);
+        client.subscribe(device_id+&amp;amp;amp;amp;amp;amp;#39;/out/#&amp;amp;amp;amp;amp;amp;#39;, {qos: 0});
     }
     function onConnectionLost(responseObject) {
         if (responseObject.errorCode !== 0)
-            console.log("App connection lost:"+responseObject.errorMessage);
+            console.log(&amp;amp;amp;amp;amp;amp;quot;App connection
+lost:&amp;amp;amp;amp;amp;amp;quot;+responseObject.errorMessage);
     }
     function onMessageArrived(message) {
-    	if  (message.destinationName == device_id + '/out/_online') {
-    		if (message.payloadString == '1')  {
-    			console.log("Device online.");
-    		}
-    		else {
-    			console.log("Device offline.");
-    		}
-    	}
-    	else {
-    		console.log(message.payloadString);
-    	}
+        if  (message.destinationName == device_id + &amp;amp;amp;amp;amp;amp;#39;/out/_online&amp;amp;amp;amp;amp;amp;#39;) {
+                if (message.payloadString == &amp;amp;amp;amp;amp;amp;#39;1&amp;amp;amp;amp;amp;amp;#39;)  {
+                        console.log(&amp;amp;amp;amp;amp;amp;quot;Device online.&amp;amp;amp;amp;amp;amp;quot;);
+                }
+                else {
+                        console.log(&amp;amp;amp;amp;amp;amp;quot;Device offline.&amp;amp;amp;amp;amp;amp;quot;);
+                }
+        }
+        else {
+                console.log(message.payloadString);
+        }
     }
 
     function led_on() {
-        client.publish(device_id+'/in', '{"rgbled_switch":true}');
-        console.log(device_id+'/in: ' + '{"rgbled_switch":true}');
+        client.publish(device_id+&amp;amp;amp;amp;amp;amp;#39;/in&amp;amp;amp;amp;amp;amp;#39;,
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true}&amp;amp;amp;amp;amp;amp;#39;);
+        console.log(device_id+&amp;amp;amp;amp;amp;amp;#39;/in: &amp;amp;amp;amp;amp;amp;#39; +
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true}&amp;amp;amp;amp;amp;amp;#39;);
     }
-    document.querySelector('#led_on').addEventListener('click', led_on);
+   
+document.querySelector(&amp;amp;amp;amp;amp;amp;#39;#led_on&amp;amp;amp;amp;amp;amp;#39;).addEventListener(&amp;amp;amp;amp;amp;amp;#39;click&amp;amp;amp;amp;amp;amp;#39;,
+led_on);
 
     function led_off() {
-        client.publish(device_id+'/in', '{"rgbled_switch":false}');
-        console.log(device_id+'/in: ' + '{"rgbled_switch":false}');
+        client.publish(device_id+&amp;amp;amp;amp;amp;amp;#39;/in&amp;amp;amp;amp;amp;amp;#39;,
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:false}&amp;amp;amp;amp;amp;amp;#39;);
+        console.log(device_id+&amp;amp;amp;amp;amp;amp;#39;/in: &amp;amp;amp;amp;amp;amp;#39; +
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:false}&amp;amp;amp;amp;amp;amp;#39;);
     }
-    document.querySelector('#led_off').addEventListener('click', led_off);
+   
+document.querySelector(&amp;amp;amp;amp;amp;amp;#39;#led_off&amp;amp;amp;amp;amp;amp;#39;).addEventListener(&amp;amp;amp;amp;amp;amp;#39;click&amp;amp;amp;amp;amp;amp;#39;,
+led_off);
 
     function led_red() {
-        client.publish(device_id+'/in', '{"rgbled_switch":true,"rgbled_hues":0, "rgbled_saturation":100, "rgbled_brightness":100}');
-        console.log(device_id+'/in: ' + '{"rgbled_switch":true,"rgbled_hues":0, "rgbled_saturation":100, "rgbled_brightness":100}');
+        client.publish(device_id+&amp;amp;amp;amp;amp;amp;#39;/in&amp;amp;amp;amp;amp;amp;#39;,
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:0,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
+        console.log(device_id+&amp;amp;amp;amp;amp;amp;#39;/in: &amp;amp;amp;amp;amp;amp;#39; +
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:0,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
     }
-    document.querySelector('#led_red').addEventListener('click', led_red);
+   
+document.querySelector(&amp;amp;amp;amp;amp;amp;#39;#led_red&amp;amp;amp;amp;amp;amp;#39;).addEventListener(&amp;amp;amp;amp;amp;amp;#39;click&amp;amp;amp;amp;amp;amp;#39;,
+led_red);
 
     function led_green() {
-        client.publish(device_id+'/in', '{"rgbled_switch":true,"rgbled_hues":120, "rgbled_saturation":100, "rgbled_brightness":100}');
-        console.log(device_id+'/in: ' + '{"rgbled_switch":true,"rgbled_hues":120, "rgbled_saturation":100, "rgbled_brightness":100}');
+        client.publish(device_id+&amp;amp;amp;amp;amp;amp;#39;/in&amp;amp;amp;amp;amp;amp;#39;,
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:120,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
+        console.log(device_id+&amp;amp;amp;amp;amp;amp;#39;/in: &amp;amp;amp;amp;amp;amp;#39; +
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:120,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
     }
-    document.querySelector('#led_green').addEventListener('click', led_green);
+   
+document.querySelector(&amp;amp;amp;amp;amp;amp;#39;#led_green&amp;amp;amp;amp;amp;amp;#39;).addEventListener(&amp;amp;amp;amp;amp;amp;#39;click&amp;amp;amp;amp;amp;amp;#39;,
+led_green);
 
     function led_blue() {
-        client.publish(device_id+'/in', '{"rgbled_switch":true,"rgbled_hues":240, "rgbled_saturation":100, "rgbled_brightness":100}');
-        console.log(device_id+'/in: ' +  '{"rgbled_switch":true,"rgbled_hues":240, "rgbled_saturation":100, "rgbled_brightness":100}');
+        client.publish(device_id+&amp;amp;amp;amp;amp;amp;#39;/in&amp;amp;amp;amp;amp;amp;#39;,
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:240,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
+        console.log(device_id+&amp;amp;amp;amp;amp;amp;#39;/in: &amp;amp;amp;amp;amp;amp;#39; + 
+&amp;amp;amp;amp;amp;amp;#39;{&amp;amp;amp;amp;amp;amp;quot;rgbled_switch&amp;amp;amp;amp;amp;amp;quot;:true,&amp;amp;amp;amp;amp;amp;quot;rgbled_hues&amp;amp;amp;amp;amp;amp;quot;:240,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_saturation&amp;amp;amp;amp;amp;amp;quot;:100,
+&amp;amp;amp;amp;amp;amp;quot;rgbled_brightness&amp;amp;amp;amp;amp;amp;quot;:100}&amp;amp;amp;amp;amp;amp;#39;);
     }
-    document.querySelector('#led_blue').addEventListener('click', led_blue);
+   
+document.querySelector(&amp;amp;amp;amp;amp;amp;#39;#led_blue&amp;amp;amp;amp;amp;amp;#39;).addEventListener(&amp;amp;amp;amp;amp;amp;#39;click&amp;amp;amp;amp;amp;amp;#39;,
+led_blue);
 }
 
-</script>
-</body>
+</script></body>
 </html>
