@@ -57,6 +57,34 @@
 		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 		<script>
+/////////////////////////////////////////////////////////////////////////		
+			function ZigBeeNode(_iEEEAddress, _shortAddress, _deviceID) {
+				this.iEEEAddress = _iEEEAddress;
+				this.shortAddress = _shortAddress;
+				this.deviceID = _deviceID;
+				
+				this.clusters = new Array("Mike", "John");
+			}
+
+
+			Car.prototype.showColor = function() {
+				alert(this.color);
+			};
+
+			var oCar1 = new Car("red", 4, 23);
+			var oCar2 = new Car("blue", 3, 25);
+
+			oCar1.drivers.push("Bill");
+
+			alert(oCar1.drivers);
+			//输出 "Mike,John,Bill"
+			alert(oCar2.drivers);
+			//输出 "Mike,John"
+			
+
+
+
+/////////////////////////////////////////////////////////////////////////
 			// 从url中获取某个参数的值
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -138,7 +166,6 @@
 					console.log(message.topic + ': ' + message.payloadString);
 
 					console.log("sven@message arrived");
-
 				}
 
 				// 串口数据发送部分
