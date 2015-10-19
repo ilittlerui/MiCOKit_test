@@ -196,6 +196,24 @@
 
 				// document.querySelector('#led_blue').addEventListener('touchstart', led_blue);
 				document.querySelector('#led_blue').addEventListener('click', led_blue);
+
+				function zcb_init() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'init' + '"}';
+					client.publish(topic, commond);
+				}
+
+				// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
+				document.querySelector('#zcb_init').addEventListener('click', zcb_init);
+
+				function zcb_permitjoin() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'permit' + '"}';
+					client.publish(topic, commond);
+				}
+
+				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
+				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 			}
 
 			// 日志打印在页面的部分
