@@ -53,7 +53,7 @@
 			</div>
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a><a class="button" style="background:black; color:white" id="zcb_test">test</a>
-			</div>			
+			</div>
 		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 		<script>
@@ -138,7 +138,7 @@
 					console.log(message.topic + ': ' + message.payloadString);
 
 					console.log("sven@message arrived");
-					
+
 				}
 
 				// 串口数据发送部分
@@ -153,10 +153,10 @@
 					console.log(inputMessage.value);
 					inputMessage.value = '';
 				}
+
 				// document.querySelector('#send2uart').addEventListener('touchstart', send2uart);
 				document.querySelector('#send2uart').addEventListener('click', send2uart);
-				
-				
+
 				//led on
 				function led_on() {
 					var topic = device_id + '/in/write';
@@ -221,7 +221,7 @@
 
 				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
 				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
-				
+
 				function zcb_devices() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'nodes' + '"}';
@@ -229,9 +229,8 @@
 				}
 
 				// document.querySelector('#zcb_devices').addEventListener('touchstart', zcb_devices);
-				document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);				
-				
-				
+				document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);
+
 			}
 
 			// 日志打印在页面的部分
