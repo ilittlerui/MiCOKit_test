@@ -59,7 +59,11 @@
 		<div class="bar bar-header bar-assertive">
 			<h1 class="title" id="device_id"></h1>
 		</div>
-
+		<!--
+		<div>
+			
+		</div>
+		-->
 		<!--<div id="debug"></div> -->
 		
 		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
@@ -106,7 +110,10 @@
 				this.shortAddress = _shortAddress;
 				this.deviceID = _deviceID;
 
-				this.clusters = new Array("Mike", "John");
+				this.clusters = new Array("basic", "powerConfigurat","Identify","Groups","Scenes","On_Off","Level_Control","Door_Lock","Thermostat",
+				"Thermostat_UI","Color_Control","ILLUMINANCE_MEASUREMENT","ILLUMINANCE_LEVEL_SENSING","TEMPERATURE_MEASUREMENT","PRESSURE_MEASUREMENT",
+				"RELATIVE_HUMIDITY_MEASUREMENT","OCCUPANCY_SENSING","IASZone","Metering","ASC","Electrical_Measurements"
+				);
 			}
 
 
@@ -114,8 +121,8 @@
 				alert(this.deviceID);
 			};
 
-			//var oZigBeeNode1 = new Car("red", 4, 23);
-			//var oZigBeeNode2 = new Car("blue", 3, 25);
+			var oZigBeeNode1 = new ZigBeeNode(null, null, null);
+			var oZigBeeNode2 = new ZigBeeNode(null, null, null);
 
 			//oCar1.drivers.push("Bill");
 
