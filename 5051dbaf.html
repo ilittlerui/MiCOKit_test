@@ -28,7 +28,18 @@
 			}
 		</style>
 	</head>
+
 	<body>
+
+		<ion-header-bar class="bar-positive">
+			<h1 class="title">我的设备</h1>
+			<div class="buttons">
+				<button class="button ion-refresh" ng-click="reloadPage()"></button>
+			</div>
+		</ion-header-bar>
+		
+
+
 		<div class="bar bar-header bar-assertive">
 			<h1 class="title" id="device_id"></h1>
 		</div>
@@ -42,6 +53,16 @@
 					Uart
 				</button>
 			</div>
+
+			<p>
+				deviceId: <span id="jdeviceId"></span>
+				<br />
+				shortAddress: <span id="jshortAddress"></span>
+				<br />
+				iEEEAddress: <span id="jiEEEAddress"></span>
+				<br />
+
+			</p>
 			<div class="button-bar">
 				<a class="button" style="background:red; color:white" id="led_red">Red</a><a class="button" style="background:green; color:white" id="led_green">Green</a><a class="button" style="background:blue; color:white" id="led_blue">Blue</a>
 			</div>
@@ -56,13 +77,15 @@
 			</div>
 		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
-		<script>
-/////////////////////////////////////////////////////////////////////////		
+
+		<script type="text/javascript" charset="UTF-8">
+			//===================================================================================//
+			//定义 zigbee 设备对象:长地址,短地址,设备ID,支持的CLuster
 			function ZigBeeNode(_iEEEAddress, _shortAddress, _deviceID) {
 				this.iEEEAddress = _iEEEAddress;
 				this.shortAddress = _shortAddress;
 				this.deviceID = _deviceID;
-				
+
 				this.clusters = new Array("Mike", "John");
 			}
 
@@ -71,8 +94,8 @@
 				alert(this.deviceID);
 			};
 
-			//var oCar1 = new Car("red", 4, 23);
-			//var oCar2 = new Car("blue", 3, 25);
+			//var oZigBeeNode1 = new Car("red", 4, 23);
+			//var oZigBeeNode2 = new Car("blue", 3, 25);
 
 			//oCar1.drivers.push("Bill");
 
@@ -80,11 +103,10 @@
 			//输出 "Mike,John,Bill"
 			//alert(oCar2.drivers);
 			//输出 "Mike,John"
-			
 
-
-
-/////////////////////////////////////////////////////////////////////////
+			//===================================================================================//
+		</script>
+		<script>
 			// 从url中获取某个参数的值
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
