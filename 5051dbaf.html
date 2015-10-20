@@ -39,14 +39,28 @@
 				<button class="button ion-refresh" ng-click="reloadPage()"></button>
 			</div>
 		</ion-header-bar>
-		
+		<ion-content>
+			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
+				<ion-item ng-repeat="item in items"
+				item="item"
+				href="{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
+					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
+					<br>
+					<span class="item-note">ID : {{ item.device_id }}</span>
+					<ion-option-button class="button-assertive"
+					ng-click="showPopup(item)">
+						Edit
+					</ion-option-button>
+				</ion-item>
+			</ion-list>
+		</ion-content>
 
-<!--
+		<!--
 		<div class="bar bar-header bar-assertive">
-			<h1 class="title" id="device_id"></h1>
+		<h1 class="title" id="device_id"></h1>
 		</div>
--->		
-		
+		-->
+
 		<div id="debug"></div>
 		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
 			<div class="item item-input-inset">
@@ -139,7 +153,7 @@
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
 				var access_token = getParameterByName('access_token');
 
-				document.getElementById('device_id').innerHTML = '我的设备:'+device_id;
+				document.getElementById('device_id').innerHTML = '我的设备:' + device_id;
 
 				// websocket连接
 				// wsbroker:host
