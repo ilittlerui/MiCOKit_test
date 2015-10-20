@@ -34,7 +34,7 @@
 	<body ng-controller="MyCtrl">
 
 		<ion-header-bar class="bar-positive">
-			<h1 class="title">我的设备</h1>
+			<h1 class="title" id="device_id" >我的设备</h1>
 			<div class="buttons">
 				<button class="button ion-refresh" ng-click="reloadPage()"></button>
 			</div>
@@ -139,7 +139,7 @@
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
 				var access_token = getParameterByName('access_token');
 
-				document.getElementById('device_id').innerHTML = device_id;
+				document.getElementById('device_id').innerHTML = '我的设备:'+device_id;
 
 				// websocket连接
 				// wsbroker:host
