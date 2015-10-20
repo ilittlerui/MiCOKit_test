@@ -29,7 +29,7 @@
 				margin-bottom: 2px;
 			}
 		</style>
-		
+
 		<script type="text/javascript" charset="UTF-8">
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -73,7 +73,9 @@
 				$scope.listCanSwipe = true;
 				$scope.showPopup = function(item) {
 					var index = $scope.items.indexOf(item);
-					$scope.data = {}
+					$scope.data = {
+						
+					};
 
 					// An elaborate, custom popup
 
