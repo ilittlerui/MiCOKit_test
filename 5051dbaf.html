@@ -32,35 +32,36 @@
 	</head>
 
 	<body>
-<!--
+		<!--
 		<ion-header-bar class="bar-positive">
-			<h1 class="title" id="device_id" >我的设备</h1>
-			<div class="buttons">
-				<button class="button ion-refresh" ng-click="reloadPage()"></button>
-			</div>
+		<h1 class="title" id="device_id" >我的设备</h1>
+		<div class="buttons">
+		<button class="button ion-refresh" ng-click="reloadPage()"></button>
+		</div>
 		</ion-header-bar>
 		<ion-content>
-			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
-				<ion-item ng-repeat="item in items"
-				item="item"
-				href="{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
-					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
-					<br>
-					<span class="item-note">ID : {{ item.device_id }}</span>
-					<ion-option-button class="button-assertive"
-					ng-click="showPopup(item)">
-						Edit
-					</ion-option-button>
-				</ion-item>
-			</ion-list>
+		<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
+		<ion-item ng-repeat="item in items"
+		item="item"
+		href="{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
+		<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
+		<br>
+		<span class="item-note">ID : {{ item.device_id }}</span>
+		<ion-option-button class="button-assertive"
+		ng-click="showPopup(item)">
+		Edit
+		</ion-option-button>
+		</ion-item>
+		</ion-list>
 		</ion-content>
--->
+		-->
 
 		<div class="bar bar-header bar-assertive">
-		<h1 class="title" id="device_id"></h1>
+			<h1 class="title" id="device_id"></h1>
 		</div>
+
+		<!--<div id="debug"></div> -->
 		
-		<div id="debug"></div>
 		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
 			<div class="item item-input-inset">
 				<label class="item-input-wrapper">
@@ -272,6 +273,8 @@
 				// document.querySelector('#led_blue').addEventListener('touchstart', led_blue);
 				document.querySelector('#led_blue').addEventListener('click', led_blue);
 
+
+				//初始化 ZigBee 网络
 				function zcb_init() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'init' + '"}';
@@ -281,6 +284,7 @@
 				// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
 				document.querySelector('#zcb_init').addEventListener('click', zcb_init);
 
+				//设置 ZigBee 网络 permit join
 				function zcb_permitjoin() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'permit' + '"}';
@@ -290,6 +294,7 @@
 				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
 				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
+				//获得 ZigBee 网络节点
 				function zcb_devices() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'nodes' + '"}';
@@ -299,6 +304,26 @@
 				// document.querySelector('#zcb_devices').addEventListener('touchstart', zcb_devices);
 				document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);
 
+				//ZigBeeControlBridge 测试方法
+				function zcb_test() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'test' + '"}';
+					client.publish(topic, commond);
+				}
+
+				// document.querySelector('#zcb_test').addEventListener('touchstart', zcb_test);
+				document.querySelector('#zcb_test').addEventListener('click', zcb_devices);
+
+				//获得 ZigBeeControlBridge 的状态
+				function zcb_getStatus() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'status' + '"}';
+					client.publish(topic, commond);
+				}
+				// document.querySelector('#zcb_getStatus').addEventListener('touchstart', zcb_getStatus);
+				document.querySelector('#zcb_getStatus').addEventListener('click', zcb_getStatus);
+
+				
 			}
 
 			// 日志打印在页面的部分
