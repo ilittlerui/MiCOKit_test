@@ -99,11 +99,10 @@
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a><a class="button" style="background:black; color:white" id="zcb_test">test</a>
 			</div>
-			<!--
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="zcb_getStatus">ZCB Status</a><a class="button" style="background:black; color:white" id="zcb_test1">test1</a>
 			</div>
-			-->
+
 		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 
@@ -112,11 +111,11 @@
 			//定义 zigbee 设备对象:长地址,短地址,设备ID,支持的CLuster
 			/*
 			function ZigBeeNode(_iEEEAddress, _shortAddress, _deviceID) {
-				this.iEEEAddress = _iEEEAddress;
-				this.shortAddress = _shortAddress;
-				this.deviceID = _deviceID;
+			this.iEEEAddress = _iEEEAddress;
+			this.shortAddress = _shortAddress;
+			this.deviceID = _deviceID;
 
-				this.clusters = new Array("basic", "powerConfigurat", "Identify", "Groups", "Scenes", "On_Off", "Level_Control", "Door_Lock", "Thermostat", "Thermostat_UI", "Color_Control", "ILLUMINANCE_MEASUREMENT", "ILLUMINANCE_LEVEL_SENSING", "TEMPERATURE_MEASUREMENT", "PRESSURE_MEASUREMENT", "RELATIVE_HUMIDITY_MEASUREMENT", "OCCUPANCY_SENSING", "IASZone", "Metering", "ASC", "Electrical_Measurements");
+			this.clusters = new Array("basic", "powerConfigurat", "Identify", "Groups", "Scenes", "On_Off", "Level_Control", "Door_Lock", "Thermostat", "Thermostat_UI", "Color_Control", "ILLUMINANCE_MEASUREMENT", "ILLUMINANCE_LEVEL_SENSING", "TEMPERATURE_MEASUREMENT", "PRESSURE_MEASUREMENT", "RELATIVE_HUMIDITY_MEASUREMENT", "OCCUPANCY_SENSING", "IASZone", "Metering", "ASC", "Electrical_Measurements");
 
 			}
 			*/
@@ -332,6 +331,15 @@
 
 				// document.querySelector('#zcb_getStatus').addEventListener('touchstart', zcb_getStatus);
 				document.querySelector('#zcb_getStatus').addEventListener('click', zcb_getStatus);
+
+				function zcb_test1() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'zcb_test1' + '"}';
+					client.publish(topic, commond);
+				}
+
+				// document.querySelector('#zcb_test1').addEventListener('touchstart', zcb_test1);
+				document.querySelector('#zcb_test1').addEventListener('click', zcb_test1);
 
 			}
 
