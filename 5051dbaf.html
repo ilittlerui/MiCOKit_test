@@ -57,10 +57,15 @@
 		-->
 
 		<div class="bar bar-header bar-assertive">
-			<h1 class="title" id="device_id"></h1>
+			<h1 class="title" id="device_id">
+				
+			</h1>
 		</div>
 
-		<div id="debug"></div>
+		<div id="debug">
+			
+			
+		</div>
 
 		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
 			<div class="item item-input-inset">
@@ -84,16 +89,21 @@
 			</p>
 			-->
 			<div class="button-bar">
-				<a class="button" style="background:red; color:white" id="led_red">Red</a><a class="button" style="background:green; color:white" id="led_green">Green</a><a class="button" style="background:blue; color:white" id="led_blue">Blue</a>
+				<a class="button" style="background:red; color:white" id="led_red">Red</a>
+				<a class="button" style="background:green; color:white" id="led_green">Green</a>
+				<a class="button" style="background:blue; color:white" id="led_blue">Blue</a>
 			</div>
 			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="led_on">On</a><a class="button" style="background:black; color:white" id="led_off">Off</a>
+				<a class="button" style="background:white; color:black" id="led_on">On</a>
+				<a class="button" style="background:black; color:white" id="led_off">Off</a>
 			</div>
 			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_init">Init ZigBee Network</a><a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
+				<a class="button" style="background:white; color:black" id="zcb_init">Init ZigBee Network</a>
+				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
 			</div>
 			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a><a class="button" style="background:black; color:white" id="zcb_test">test</a>
+				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a>
+				<a class="button" style="background:black; color:white" id="zcb_test">test</a>
 			</div>
 			<!--
 			<div class="button-bar">
@@ -101,7 +111,7 @@
 			</div>
 			-->
 		</div>
-		
+
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			//===================================================================================//
@@ -133,7 +143,8 @@
 
 			//===================================================================================//
 		</script>
-		<script>
+
+		<script type="text/javascript" charset="UTF-8">
 			// 从url中获取某个参数的值
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -162,7 +173,7 @@
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
 				var access_token = getParameterByName('access_token');
 
-				document.getElementById('device_id').innerHTML = '我的设备:' + device_id;
+				document.getElementById('device_id').innerHTML = '我的网关:' + device_id;
 
 				// websocket连接
 				// wsbroker:host
@@ -199,6 +210,8 @@
 					};
 					console.log("device_id:" + device_id);
 					console.log("onConnect");
+					zcb_devices();
+					
 					client.subscribe(subtopic, {
 						qos : 0
 					});
