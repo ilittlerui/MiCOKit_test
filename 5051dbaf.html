@@ -100,7 +100,7 @@
 				<a class="button" style="background:black; color:white" id="led_off">Off</a>
 			</div>
 			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_init">Init ZigBee Network</a>
+				<a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
 				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
 			</div>
 			<div class="button-bar">
@@ -297,17 +297,17 @@
 				// document.querySelector('#led_blue').addEventListener('touchstart', led_blue);
 				document.querySelector('#led_blue').addEventListener('click', led_blue);
 
-
+*/
 				//初始化 ZigBee 网络
-				function zcb_init() {
+				function zcb_factorynew() {
 					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'init' + '"}';
+					var commond = '{"11":"' + 'factorynew' + '"}';
 					client.publish(topic, commond);
 				}
 
 				// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
-				document.querySelector('#zcb_init').addEventListener('click', zcb_init);
-*/
+				document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
+
 				//设置 ZigBee 网络 permit join
 				function zcb_permitjoin() {
 					var topic = device_id + '/in/write';
@@ -349,14 +349,6 @@
 				 // document.querySelector('#zcb_getStatus').addEventListener('touchstart', zcb_getStatus);
 				 document.querySelector('#zcb_getStatus').addEventListener('click', zcb_getStatus);
 
-				 function zcb_test1() {
-				 var topic = device_id + '/in/write';
-				 var commond = '{"11":"' + 'zcb_test1' + '"}';
-				 client.publish(topic, commond);
-				 }
-
-				 // document.querySelector('#zcb_test1').addEventListener('touchstart', zcb_test1);
-				 document.querySelector('#zcb_test1').addEventListener('click', zcb_test1);
 				 */
 			}
 
