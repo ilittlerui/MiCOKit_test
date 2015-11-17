@@ -269,35 +269,6 @@
 				document.querySelector('#led_off').addEventListener('click', led_off);
 
 
-/*
-				function zcb_searchDevice() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'nodes' + '"}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#zcb_searchDevice').addEventListener('touchstart', zcb_searchDevice);
-				document.querySelector('#zcb_searchDevice').addEventListener('click', zcb_searchDevice);
-
-				function led_green() {
-					var topic = device_id + '/in/write';
-					var commond = '{"rgbled_switch":true,"rgbled_hues":120, "rgbled_saturation":100, "rgbled_brightness":100}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#led_green').addEventListener('touchstart', led_green);
-				document.querySelector('#led_green').addEventListener('click', led_green);
-
-				function led_blue() {
-					var topic = device_id + '/in/write';
-					var commond = '{"rgbled_switch":true,"rgbled_hues":240, "rgbled_saturation":100, "rgbled_brightness":100}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#led_blue').addEventListener('touchstart', led_blue);
-				document.querySelector('#led_blue').addEventListener('click', led_blue);
-
-*/
 				//初始化 ZigBee 网络
 				function zcb_factorynew() {
 					var topic = device_id + '/in/write';
