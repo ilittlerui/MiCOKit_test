@@ -71,7 +71,7 @@
 				var access_token = getParameterByName('access_token');
 
 				//document.getElementById('device_id').innerHTML = '我的网关:' + device_id;
-				document.getElementById('device_id').innerHTML = 'Device List';
+				document.getElementById('global_device_id').innerHTML = 'Device List';
 
 				// websocket连接
 				// wsbroker:host
@@ -148,6 +148,7 @@
 				function led_on() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'on' + '"}';
+					console.log("led_on");
 					client.publish(topic, commond);
 				}
 
@@ -230,7 +231,7 @@
 
 		</script>
 
-<!-- ===================================================================================================================== -->
+		<!-- ===================================================================================================================== -->
 		<script type="text/javascript" charset="UTF-8">
 			function getParameterByName(name) {
 				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -352,7 +353,7 @@
 
 	<body ng-controller="MyCtrl">
 		<ion-header-bar class="bar bar-header bar-assertive">
-			<h1 class="title" id="device_id"></h1>
+			<h1 class="title" id="global_device_id"></h1>
 			<div class="buttons">
 				<button class="button ion-refresh" ng-click="reloadPage()"></button>
 			</div>
@@ -375,27 +376,6 @@
 		</ion-content>
 
 		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
-			<!--
-			<div class="item item-input-inset">
-			<label class="item-input-wrapper">
-			<input type="text" placeholder="message" id="message">
-			</label>
-			<button class="button button-small button-royal" id="send2uart">
-			Uart
-			</button>
-			</div>
-			-->
-			<!--
-			<p>
-			deviceId: <span id="jdeviceId"></span>
-			<br />
-			shortAddress: <span id="jshortAddress"></span>
-			<br />
-			iEEEAddress: <span id="jiEEEAddress"></span>
-			<br />
-
-			</p>
-			-->
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="led_on">On</a>
 				<a class="button" style="background:black; color:white" id="led_off">Off</a>
