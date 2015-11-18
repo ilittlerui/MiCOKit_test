@@ -3,9 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-		<title>MiCOKit08</title>
+		<title>My Gateway</title>
 		<link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
-		<!-- <link href="//api.easylink.io/bower_components/ionic/css/ionic.min.css" rel="stylesheet"> -->
 		<!-- <script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script> -->
 		<style>
 			#debug {
@@ -35,12 +34,7 @@
 		<div class="bar bar-header bar-assertive">
 			<h1 class="title" id="device_id"></h1>
 		</div>
-		
-		<!--
-		<div class="bar bar-header bar-assertive">
-			<h1>我的设备列表</h1>
-		</div>
-		-->
+
 		<!--
 		<ion-header-bar class="bar-positive">
 		<h1 class="title">我的设备</h1>
@@ -88,13 +82,6 @@
 
 			</p>
 			-->
-			<!--
-			<div class="button-bar">
-			<a class="button" style="background:red; color:white" id="zcb_searchDevice">SearchDevice</a>
-			<a class="button" style="background:green; color:white" id="led_green">Green</a>
-			<a class="button" style="background:blue; color:white" id="led_blue">Blue</a>
-			</div>
-			-->
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="led_on">On</a>
 				<a class="button" style="background:black; color:white" id="led_off">Off</a>
@@ -107,11 +94,6 @@
 				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a>
 				<a class="button" style="background:black; color:white" id="zcb_test">test</a>
 			</div>
-			<!--
-			<div class="button-bar">
-			<a class="button" style="background:white; color:black" id="zcb_getStatus">ZCB Status</a><a class="button" style="background:black; color:white" id="zcb_test1">test1</a>
-			</div>
-			-->
 		</div>
 
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
@@ -210,7 +192,6 @@
 						message.destinationName = topic;
 						client.send(message);
 					};
-					//console.log("device_id:" + device_id);
 					console.log("Have Connect");
 					console.log("ZigBee Devices List:");
 					zcb_devices();
@@ -237,13 +218,13 @@
 				var inputMessage = document.getElementById('message');
 				// 将消息发送到指定的通道
 				function send2uart() {
-					if (inputMessage.value.length == 0)
-						return;
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + inputMessage.value + '"}';
-					client.publish(topic, commond);
-					console.log(inputMessage.value);
-					inputMessage.value = '';
+				if (inputMessage.value.length == 0)
+				return;
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + inputMessage.value + '"}';
+				client.publish(topic, commond);
+				console.log(inputMessage.value);
+				inputMessage.value = '';
 				}
 
 				// document.querySelector('#send2uart').addEventListener('touchstart', send2uart);
@@ -268,7 +249,6 @@
 
 				// document.querySelector('#led_off').addEventListener('touchstart', led_off);
 				document.querySelector('#led_off').addEventListener('click', led_off);
-
 
 				//初始化 ZigBee 网络
 				function zcb_factorynew() {
