@@ -31,17 +31,21 @@
 	</head>
 
 	<body>
-		<div class="bar bar-header bar-assertive">
-			<h1 class="title" id="device_id"></h1>
-		</div>
 
 		<!--
-		<ion-header-bar class="bar-positive">
-		<h1 class="title">我的设备</h1>
-		<div class="buttons">
-		<button class="button ion-refresh" ng-click="reloadPage()"></button>
+		<div class="bar bar-header bar-assertive">
+		<h1 class="title" id="device_id"></h1>
 		</div>
+		-->
+
+		<ion-header-bar class="bar-positive">
+			<h1 class="title" id="device_id"></h1>
+			<div class="buttons">
+				<button class="button ion-refresh" ng-click="reloadPage()"></button>
+			</div>
 		</ion-header-bar>
+
+		<!--
 
 		<ion-content>
 		<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
@@ -157,7 +161,8 @@
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
 				var access_token = getParameterByName('access_token');
 
-				document.getElementById('device_id').innerHTML = '我的网关:' + device_id;
+				//document.getElementById('device_id').innerHTML = '我的网关:' + device_id;
+				document.getElementById('device_id').innerHTML = 'Device List';
 
 				// websocket连接
 				// wsbroker:host
