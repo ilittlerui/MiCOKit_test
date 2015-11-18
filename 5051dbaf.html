@@ -96,23 +96,6 @@
 					console.log("sven@message arrived");
 				}
 
-				/*
-				// 串口数据发送部分
-				var inputMessage = document.getElementById('message');
-				// 将消息发送到指定的通道
-				function send2uart() {
-				if (inputMessage.value.length == 0)
-				return;
-				var topic = device_id + '/in/write';
-				var commond = '{"11":"' + inputMessage.value + '"}';
-				client.publish(topic, commond);
-				console.log(inputMessage.value);
-				inputMessage.value = '';
-				}
-
-				// document.querySelector('#send2uart').addEventListener('touchstart', send2uart);
-				document.querySelector('#send2uart').addEventListener('click', send2uart);
-				*/
 				//led on
 				function led_on() {
 					var topic = device_id + '/in/write';
@@ -178,24 +161,11 @@
 
 			// 日志打印在页面的部分
 			var i = 0;
-			console.log = ( function(old_funct, div_log) {
+			console.log = ( function(old_funct) {
 					return function(text) {
 						old_funct(text);
-						var p = '';
-						if (i % 2 == 0)
-							p = '<p>';
-						else
-							p = '<p class=\'gray\'>';
-
-						if ( typeof text === "object")
-							div_log.innerHTML += p + JSON.stringify(text) + '</p>';
-						else
-							div_log.innerHTML += p + text + '</p>';
-
-						div_log.scrollTop = div_log.scrollHeight;
-						i += 1;
 					};
-				}(console.log.bind(console), document.getElementById("debug")));
+				}(console.log.bind(console)));
 			console.error = console.debug = console.info = console.log;
 
 		</script>
