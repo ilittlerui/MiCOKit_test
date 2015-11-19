@@ -5,9 +5,6 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
 		<title>My Gateway</title>
 		<link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
-		<!-- <link href="//api.easylink.io/bower_components/ionic/css/ionic.min.css" rel="stylesheet"> -->
-		<!-- <script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script> -->
-
 		<script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>	
 		<script type="text/javascript" charset="UTF-8">
@@ -24,22 +21,12 @@
 				ez_connect(my_device_id);
 			}
 
-			// function dump_obj(myObject) {
-			//     var s = '';
-			//     for (var property in myObject) {
-			//         s += '<span>' + property +": " + myObject[property] + '</span>';
-			//     }
-			//     return s;
-			// }
-
 			// 连接MQTT服务
 			function ez_connect(device_id) {
 				// 获取access_token
 				// access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
 				var access_token = getParameterByName('access_token');
-
-				//document.getElementById('global_device_id').innerHTML = 'Device List';
 
 				// websocket连接
 				// wsbroker:host
@@ -93,6 +80,10 @@
 				function onMessageArrived(message) {
 					console.log(message.topic + ': ' + message.payloadString);
 					console.log("sven@message arrived");
+					
+					//消息类型:设备列表(将设备列表信息push到items中)
+					//设备列表的格式？
+					
 				}
 
 				//led on
@@ -204,7 +195,8 @@
 					alert(e);
 				}
 			}
-
+			
+			//模块
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
 				$scope.access_token = access_token;
@@ -259,6 +251,12 @@
 				//刷新页面
 				//{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}
 				$scope.reloadPage = function() {
+					//重新载入页面，刷新设备列表
+					//1.发送设备列表请求
+					
+					//2.接收设备列表
+					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
+					
 					$http.post('http://api.easylink.io/v1/device/devices', null, {
 						headers : {
 							'AUTHORIZATION' : "token " + access_token
@@ -327,8 +325,5 @@
 				<a class="button" style="background:black; color:white" id="zcb_test">test</a>
 			</div>
 		</div>
-
-
-
 	</body>
 </html>
