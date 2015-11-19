@@ -257,10 +257,9 @@
 					//设备列表的格式?
 					var receivedMessage = [];
 					receivedMessage = JSON.parse(message.payloadString);
-					//console.log(receivedMessage);
-					//console.log(receivedMessage[0]);
+
 					if (receivedMessage.hasOwnProperty("devicelist")) {
-						console.log(receivedMessage.devicelist[0]);
+						console.log(JSON.parse(receivedMessage.devicelist));
 						
 						var deviceLists = JSON.parse(receivedMessage.devicelist);
 						if (deviceLists !== null) {
