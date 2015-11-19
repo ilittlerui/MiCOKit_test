@@ -261,16 +261,19 @@
 							try {
 								deviceLists = JSON.parse(deviceLists);
 								
+								console.log(deviceLists);
+								/*
 								for(var i in deviceLists)
 								{
 									var device = deviceLists[i];
 									if(device[0]==NULL)
 										break;
-									console.log(device[0].Zigbee_longAddress_H);
-									console.log(device[0].Zigbee_longAddress_L);
-									console.log(device[0].Zigbee_shortAddress);
-									console.log(device[0].Zigbee_deviceID);
+									console.log(device[0][0].Zigbee_longAddress_H);
+									console.log(device[0][0].Zigbee_longAddress_L);
+									console.log(device[0][0].Zigbee_shortAddress);
+									console.log(device[0][0].Zigbee_deviceID);
 								}
+								*/
 								/*
 								 for (var i in deviceLists ) {
 								 var device = deviceLists[i];
