@@ -252,7 +252,7 @@
 					console.log(message.payloadString);
 					console.log("sven@message arrived");
 
-					var obj = eval ("("message.payloadString")");
+					var obj = eval("(" + message.payloadString + ")");
 					console.log(obj);
 					
 					//判断key值:设备列表(将设备列表信息push到items中)
