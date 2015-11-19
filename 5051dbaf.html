@@ -252,16 +252,16 @@
 					console.log(message.payloadString);
 					console.log("sven@message arrived");
 
-					var obj = eval("(" + message.payloadString + ")");
-					console.log(obj);
 					
 					//判断key值:设备列表(将设备列表信息push到items中)
 					//设备列表的格式?
 					var receivedMessage = [];
 					receivedMessage = JSON.parse(message.payloadString);
-					console.log(receivedMessage);
-					console.log(receivedMessage[0]);
+					//console.log(receivedMessage);
+					//console.log(receivedMessage[0]);
 					if (receivedMessage.hasOwnProperty("devicelist")) {
+						console.log(receivedMessage.devicelist[0]);
+						
 						var deviceLists = JSON.parse(receivedMessage.devicelist);
 						if (deviceLists !== null) {
 							try {
