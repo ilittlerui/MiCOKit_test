@@ -254,7 +254,7 @@
 
 					var msgjson = $.parseJSON(message.payloadString);
 					console.log(msgjson);
-
+					
 					console.log("2");
 					//判断key值:设备列表(将设备列表信息push到items中)
 					//设备列表的格式?
@@ -264,7 +264,8 @@
 					console.log("3");
 					if (receivedMessage.hasOwnProperty("devicelist")) {
 						console.log("4");
-						console.log(JSON.parse(receivedMessage.devicelist));
+						console.log(receivedMessage.devicelist);
+						console.log("5");
 
 						var deviceLists = JSON.parse(receivedMessage.devicelist);
 						if (deviceLists !== null) {
