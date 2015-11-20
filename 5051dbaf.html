@@ -253,12 +253,20 @@
 					var msgjson = $.parseJSON(message.payloadString);
 					console.log(msgjson);
 					if (msgjson.hasOwnProperty("devicelist")) {
+						
+						var device_test = msgjson.devicelist;
+						console.log(device_test);
+						
 						console.log(msgjson.devicelist.d0.Zigbee_longAddress_H);
 						console.log(msgjson.devicelist.d0.Zigbee_longAddress_L);
 						console.log(msgjson.devicelist.d0.Zigbee_shortAddress);
 						console.log(msgjson.devicelist.d0.Zigbee_deviceID);
 
+					}else
+					{
+						
 					}
+					
 				}
 
 				//led on
