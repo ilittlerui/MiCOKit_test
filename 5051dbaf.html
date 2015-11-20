@@ -267,6 +267,7 @@
 					console.log(receivedMessage);
 					
 					if (receivedMessage.hasOwnProperty("devicelist")) {
+						
 						console.log(JSON.parse(receivedMessage.devicelist));
 						
 						var deviceLists = JSON.parse(receivedMessage.devicelist);
