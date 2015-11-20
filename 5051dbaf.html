@@ -254,7 +254,7 @@
 
 					var msgjson = $.parseJSON(message.payloadString);
 					console.log(msgjson);
-					
+
 					console.log("2");
 					//判断key值:设备列表(将设备列表信息push到items中)
 					//设备列表的格式?
@@ -270,74 +270,70 @@
 						console.log(receivedMessage.devicelist.Zigbee_longAddress_L);
 						console.log(receivedMessage.devicelist.Zigbee_shortAddress);
 						console.log(receivedMessage.devicelist.Zigbee_deviceID);
-						
-						}
-					} else {
-						console.log("no devicelist");
+
 					}
+			}
 
-				}
+			//led on
+			function led_on() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'on' + '"}';
+				console.log("led_on");
+				client.publish(topic, commond);
+			}
 
-				//led on
-				function led_on() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'on' + '"}';
-					console.log("led_on");
-					client.publish(topic, commond);
-				}
+			// document.querySelector('#led_on').addEventListener('touchstart', led_on);
+			document.querySelector('#led_on').addEventListener('click', led_on);
 
-				// document.querySelector('#led_on').addEventListener('touchstart', led_on);
-				document.querySelector('#led_on').addEventListener('click', led_on);
+			//led off
+			function led_off() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'off' + '"}';
+				client.publish(topic, commond);
+			}
 
-				//led off
-				function led_off() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'off' + '"}';
-					client.publish(topic, commond);
-				}
+			// document.querySelector('#led_off').addEventListener('touchstart', led_off);
+			document.querySelector('#led_off').addEventListener('click', led_off);
 
-				// document.querySelector('#led_off').addEventListener('touchstart', led_off);
-				document.querySelector('#led_off').addEventListener('click', led_off);
+			//初始化 ZigBee 网络
+			function zcb_factorynew() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'factorynew' + '"}';
+				client.publish(topic, commond);
+			}
 
-				//初始化 ZigBee 网络
-				function zcb_factorynew() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'factorynew' + '"}';
-					client.publish(topic, commond);
-				}
+			// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
+			document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
-				// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
-				document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
+			//设置 ZigBee 网络 permit join
+			function zcb_permitjoin() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'permit' + '"}';
+				client.publish(topic, commond);
+			}
 
-				//设置 ZigBee 网络 permit join
-				function zcb_permitjoin() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'permit' + '"}';
-					client.publish(topic, commond);
-				}
+			// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
+			document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
-				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
-				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
+			//获得 ZigBee 网络节点
+			function zcb_devices() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'nodes' + '"}';
+				client.publish(topic, commond);
+			}
 
-				//获得 ZigBee 网络节点
-				function zcb_devices() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'nodes' + '"}';
-					client.publish(topic, commond);
-				}
+			// document.querySelector('#zcb_devices').addEventListener('touchstart', zcb_devices);
+			document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);
 
-				// document.querySelector('#zcb_devices').addEventListener('touchstart', zcb_devices);
-				document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);
+			//ZigBeeControlBridge 测试方法
+			function zcb_test() {
+				var topic = device_id + '/in/write';
+				var commond = '{"11":"' + 'test' + '"}';
+				client.publish(topic, commond);
+			}
 
-				//ZigBeeControlBridge 测试方法
-				function zcb_test() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'test' + '"}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#zcb_test').addEventListener('touchstart', zcb_test);
-				document.querySelector('#zcb_test').addEventListener('click', zcb_test);
+			// document.querySelector('#zcb_test').addEventListener('touchstart', zcb_test);
+			document.querySelector('#zcb_test').addEventListener('click', zcb_test);
 
 			}
 
