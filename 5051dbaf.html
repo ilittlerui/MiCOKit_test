@@ -264,9 +264,13 @@
 					console.log("3");
 					if (receivedMessage.hasOwnProperty("devicelist")) {
 						console.log("4");
-						console.log(receivedMessage[0]);
+						console.log(receivedMessage.devicelist);
 						console.log("5");
-
+						console.log(receivedMessage.devicelist.Zigbee_longAddress_H);
+						console.log(receivedMessage.devicelist.Zigbee_longAddress_L);
+						console.log(receivedMessage.devicelist.Zigbee_shortAddress);
+						console.log(receivedMessage.devicelist.Zigbee_deviceID);
+						
 						var deviceLists = JSON.parse(receivedMessage.devicelist);
 						if (deviceLists !== null) {
 							try {
