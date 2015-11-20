@@ -256,7 +256,8 @@
 
 						var device_test = msgjson.devicelist;
 						console.log(device_test);
-
+						console.log(device_test.length);
+						
 						for (var i = 0; i < device_test.length; i++) {
 							var device = device_test[i];
 							console.log(device.Zigbee_longAddress_H);
@@ -264,11 +265,6 @@
 							console.log(device.Zigbee_shortAddress);
 							console.log(device.Zigbee_deviceID);
 						}
-						console.log(msgjson.devicelist.d0.Zigbee_longAddress_H);
-						console.log(msgjson.devicelist.d0.Zigbee_longAddress_L);
-						console.log(msgjson.devicelist.d0.Zigbee_shortAddress);
-						console.log(msgjson.devicelist.d0.Zigbee_deviceID);
-
 					} else {
 
 					}
