@@ -246,6 +246,17 @@
 						console.log("onConnectionLost:" + responseObject.errorMessage);
 				}
 
+				function printAll(obj) {
+					for (var k in obj) {
+						var v = obj[k];
+						if ( typeof (v) != "object") {
+							document.writeln(k + "是" + v + "<br/>");
+						} else {
+							printAll(v);
+						}
+					}
+				}
+
 				// 消息到达
 				function onMessageArrived(message) {
 					console.log(message.payloadString);
@@ -257,6 +268,8 @@
 						var device_test = msgjson.devicelist;
 						console.log(device_test);
 						console.log(device_test.length);
+
+						printAll(device_test);
 						
 						for (var i = 0; i < device_test.length; i++) {
 							var device = device_test[i];
