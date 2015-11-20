@@ -271,44 +271,6 @@
 						console.log(receivedMessage.devicelist.Zigbee_shortAddress);
 						console.log(receivedMessage.devicelist.Zigbee_deviceID);
 						
-						var deviceLists = JSON.parse(receivedMessage.devicelist);
-						if (deviceLists !== null) {
-							try {
-								deviceLists = JSON.parse(deviceLists);
-
-								console.log(deviceLists);
-								/*
-								 for(var i in deviceLists)
-								 {
-								 var device = deviceLists[i];
-								 if(device[0]==NULL)
-								 break;
-								 console.log(device[0][0].Zigbee_longAddress_H);
-								 console.log(device[0][0].Zigbee_longAddress_L);
-								 console.log(device[0][0].Zigbee_shortAddress);
-								 console.log(device[0][0].Zigbee_deviceID);
-								 }
-								 */
-								/*
-								 for (var i in deviceLists ) {
-								 var device = deviceLists[i];
-								 if (device[0] === null)
-								 continue;
-								 var product_id = device[0].split('/')[0];
-								 var alias = device[3] ? device[3] : device[0];
-								 device_list.push({
-								 'alias' : alias,
-								 'device_id' : device[0],
-								 'product_id' : product_id,
-								 'time' : new Date(parseInt(device[1]) * 1000).toLocaleString(),
-								 'state' : device[2]
-								 });
-								 }
-								 */
-
-							} catch(e) {
-								alert(e);
-							}
 						}
 					} else {
 						console.log("no devicelist");
