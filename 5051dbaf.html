@@ -108,7 +108,7 @@
 
 					//2.接收设备列表
 					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
-
+					console.log("refresh device");
 					$http.post('http://api.easylink.io/v1/device/devices', null, {
 						headers : {
 							'AUTHORIZATION' : "token " + access_token
@@ -270,12 +270,29 @@
 						var ddd = msgjson.devicelist;
 						console.log(ddd);
 						console.log("2");
-						
-						for(var p in ddd)
+
+						$scope.items = [];					
+						for (var p in ddd)//遍历设备对象
 						{
 							console.log(ddd[p]);
+							
+							//Zigbee_longAddress_H 
+							//Zigbee_longAddress_L 
+							//Zigbee_shortAddress
+							//Zigbee_deviceID
+								var Zigbee_deviceID = 
+								$scope.items.push({
+									'alias' : undefined,
+									'device_id' : ddd[p].Zigbee_deviceID,
+									'device_address_H' : ddd[p].Zigbee_longAddress_H,
+									'device_address_L' : ddd[p].Zigbee_longAddress_L,
+									'device_short_address':ddd[p].Zigbee_shortAddress,
+									'state' : 1
+								});
+
+
 						}
-						
+
 					} else {
 
 					}
