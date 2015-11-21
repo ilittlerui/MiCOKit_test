@@ -267,24 +267,10 @@
 					if (msgjson.hasOwnProperty("devicelist")) {
 
 						console.log("1");
-
-
-						$scope.items = [];
-						for (var i in msgjson ) {
-							var device = msgjson[i];
-							console.log(device);
-							if (device === null)
-								continue;
-							var product_id = device.id.split('/')[0];
-							var alias = device.alias ? device.alias : device.id;
-							$scope.items.push({
-								'alias' : alias,
-								'device_id' : device.id,
-								'product_id' : product_id,
-								'time' : device.created,
-								'state' : device.online
-							});
-						}
+						var d0 = $.parseJSON(msgjson.devicelist);
+						console.log(d0);
+						console.log("2");
+						
 					} else {
 
 					}
