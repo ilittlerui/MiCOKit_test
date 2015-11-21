@@ -246,17 +246,18 @@
 						console.log("onConnectionLost:" + responseObject.errorMessage);
 				}
 
+				/*
 				function printAll(obj) {
-					for (var k in obj) {
-						var v = obj[k];
-						if ( typeof (v) != "object") {
-							document.writeln(k + "是" + v + "<br/>");
-						} else {
-							printAll(v);
-						}
-					}
+				for (var k in obj) {
+				var v = obj[k];
+				if ( typeof (v) != "object") {
+				document.writeln(k + "是" + v + "<br/>");
+				} else {
+				printAll(v);
 				}
-
+				}
+				}
+				*/
 				// 消息到达
 				function onMessageArrived(message) {
 					console.log(message.payloadString);
@@ -265,18 +266,24 @@
 					console.log(msgjson);
 					if (msgjson.hasOwnProperty("devicelist")) {
 
-						var device_test = msgjson.devicelist;
-						console.log(device_test);
-						console.log(device_test.length);
 						console.log("1");
-						//printAll(device_test);
-						
-						for (var i = 0; i < device_test.length; i++) {
-							var device = device_test[i];
-							console.log(device.Zigbee_longAddress_H);
-							console.log(device.Zigbee_longAddress_L);
-							console.log(device.Zigbee_shortAddress);
-							console.log(device.Zigbee_deviceID);
+
+
+						$scope.items = [];
+						for (var i in msgjson ) {
+							var device = msgjson[i];
+							console.log(device);
+							if (device === null)
+								continue;
+							var product_id = device.id.split('/')[0];
+							var alias = device.alias ? device.alias : device.id;
+							$scope.items.push({
+								'alias' : alias,
+								'device_id' : device.id,
+								'product_id' : product_id,
+								'time' : device.created,
+								'state' : device.online
+							});
 						}
 					} else {
 
