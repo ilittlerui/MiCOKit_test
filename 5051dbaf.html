@@ -118,6 +118,8 @@
 						console.log(items);
 
 						$scope.items = [];
+						$scope.items = items;
+						/*
 						for (var i in data ) {
 							var device = data[i];
 							if (device === null)
@@ -132,6 +134,7 @@
 								'state' : device.online
 							});
 						}
+						*/
 						console.log($scope.items);
 
 					}).error(function(data) {
