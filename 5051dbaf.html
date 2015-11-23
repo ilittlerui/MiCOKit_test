@@ -10,11 +10,9 @@
 		<script src="./js/jquery-2.1.3.js"></script>
 		<!-- ===================================================================================================================== -->
 		<script type="text/javascript" charset="UTF-8">
-			var device_list = [];
-			/*
 			function getParameterByName(name) {
-			var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-			return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
 			//这里可以从Wifi中获取一个相似的设备列表
@@ -24,29 +22,29 @@
 			var device_list = [];
 			//设备列表
 			var deviceLists = getParameterByName('device_list');
+			
 			if (deviceLists !== null) {
-			try {
-			deviceLists = JSON.parse(deviceLists);
+				try {
+					deviceLists = JSON.parse(deviceLists);
 
-			for (var i in deviceLists ) {
-			var device = deviceLists[i];
-			if (device[0] === null)
-			continue;
-			var product_id = device[0].split('/')[0];
-			var alias = device[3] ? device[3] : device[0];
-			device_list.push({
-			'alias' : alias,
-			'device_id' : device[0],
-			'product_id' : product_id,
-			'time' : new Date(parseInt(device[1]) * 1000).toLocaleString(),
-			'state' : device[2]
-			});
+					for (var i in deviceLists ) {
+						var device = deviceLists[i];
+						if (device[0] === null)
+							continue;
+						var product_id = device[0].split('/')[0];
+						var alias = device[3] ? device[3] : device[0];
+						device_list.push({
+							'alias' : alias,
+							'device_id' : device[0],
+							'product_id' : product_id,
+							'time' : new Date(parseInt(device[1]) * 1000).toLocaleString(),
+							'state' : device[2]
+						});
+					}
+				} catch(e) {
+					alert(e);
+				}
 			}
-			} catch(e) {
-			alert(e);
-			}
-			}
-			*/
 
 			//模块
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
@@ -269,15 +267,15 @@
 							//Zigbee_shortAddress
 							//Zigbee_deviceID
 							/*
-							$scope.items.push({
-								'alias' : undefined,
-								'device_id' : ddd[p].Zigbee_deviceID,
-								'device_address_H' : ddd[p].Zigbee_longAddress_H,
-								'device_address_L' : ddd[p].Zigbee_longAddress_L,
-								'device_short_address' : ddd[p].Zigbee_shortAddress,
-								'state' : 1
-							});
-							*/
+							 $scope.items.push({
+							 'alias' : undefined,
+							 'device_id' : ddd[p].Zigbee_deviceID,
+							 'device_address_H' : ddd[p].Zigbee_longAddress_H,
+							 'device_address_L' : ddd[p].Zigbee_longAddress_L,
+							 'device_short_address' : ddd[p].Zigbee_shortAddress,
+							 'state' : 1
+							 });
+							 */
 
 						}
 
