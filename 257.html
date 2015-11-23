@@ -119,6 +119,7 @@
 				message = JSON.stringify(message);
 				//var commond = '{"11":"' + 'on' + '"}';
 				console.log("led_on");
+				console.log(message);
 				client.publish(topic, message);
 			}
 
@@ -140,6 +141,7 @@
 				message = JSON.stringify(message);
 				//var commond = '{"11":"' + 'on' + '"}';
 				console.log("led_off");
+				console.log(message);
 				client.publish(topic, message);
 			}
 
