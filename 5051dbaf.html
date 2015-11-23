@@ -16,10 +16,6 @@
 				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
-
-		
-		
-
 			var device_list = [];
 
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
@@ -104,8 +100,6 @@
 				};
 
 			});
-			
-			
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
@@ -218,8 +212,6 @@
 					console.log("led_on");
 					client.publish(topic, commond);
 				}
-
-				// document.querySelector('#led_on').addEventListener('touchstart', led_on);
 				document.querySelector('#led_on').addEventListener('click', led_on);
 
 				//led off
@@ -228,8 +220,6 @@
 					var commond = '{"11":"' + 'off' + '"}';
 					client.publish(topic, commond);
 				}
-
-				// document.querySelector('#led_off').addEventListener('touchstart', led_off);
 				document.querySelector('#led_off').addEventListener('click', led_off);
 
 				//初始化 ZigBee 网络
@@ -238,8 +228,6 @@
 					var commond = '{"11":"' + 'factorynew' + '"}';
 					client.publish(topic, commond);
 				}
-
-				// document.querySelector('#zcb_init').addEventListener('touchstart', zcb_init);
 				document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
 				//设置 ZigBee 网络 permit join
@@ -248,8 +236,6 @@
 					var commond = '{"11":"' + 'permit' + '"}';
 					client.publish(topic, commond);
 				}
-
-				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
 				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
 				function zcb_devices() {
