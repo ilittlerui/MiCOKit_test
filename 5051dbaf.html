@@ -19,11 +19,10 @@
 			// 得到设备ID
 			var device_id = getParameterByName('device_id');
 			console.log(device_id);
-			my_device_id = device_id;
+			var my_device_id = device_id;
 			var device_list = [];
 			
-			
-
+		
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
 				$scope.access_token = access_token;
@@ -110,7 +109,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
 
-			
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			if (my_device_id !== null) {
 				ez_connect(my_device_id);
