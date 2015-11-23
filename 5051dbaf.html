@@ -16,7 +16,13 @@
 				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
+			// 得到设备ID
+			var device_id = getParameterByName('device_id');
+			console.log(device_id);
+			my_device_id = device_id;
 			var device_list = [];
+			
+			
 
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
@@ -103,9 +109,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
-						// 得到设备ID
-			var my_device_id = getParameterByName('device_id');
-			console.log(my_device_id);
+
 			
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			if (my_device_id !== null) {
@@ -140,7 +144,7 @@
 				});
 
 				// 连接成功
-				function onConnect() {
+				function onConnect() {c
 					var subtopic = device_id + '/out/#';
 					// Once a connection has been made, make a subscription and send a message.
 					// 向某个通道发送指令
