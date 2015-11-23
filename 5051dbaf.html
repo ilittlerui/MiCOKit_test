@@ -15,7 +15,6 @@
 				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
-			var gloab_device_id;
 			//这里可以从Wifi中获取一个相似的设备列表
 			//1.创建mqqt，获取设备列表信息
 			//2.每个设备都有一个
@@ -34,7 +33,6 @@
 							continue;
 						var product_id = device[0].split('/')[0];
 						var alias = device[3] ? device[3] : device[0];
-						gloab_device_id = device[0];
 						device_list.push({
 							'alias' : alias,
 							'device_id' : device[0],
@@ -101,7 +99,6 @@
 				};
 
 				//刷新页面
-				//{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}
 				$scope.reloadPage = function() {
 					//重新载入页面，刷新设备列表
 					//1.发送设备列表请求
@@ -138,7 +135,7 @@
 
 	<body ng-controller="MyCtrl">
 		<ion-header-bar class="bar bar-header bar-assertive">
-			<h1 class="title" id="global_device_id">Device List</h1>
+			<h1 class="title" >Device List</h1>
 			<div class="buttons">
 				<button class="button ion-refresh" ng-click="reloadPage()"></button>
 			</div>
@@ -179,6 +176,7 @@
 
 			// 得到设备ID
 			var my_device_id = getParameterByName('device_id');
+			console.log(my_device_id);
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			if (my_device_id !== null) {
 				ez_connect(my_device_id);
@@ -265,7 +263,7 @@
 
 							items.push({
 							'alias' : 1,
-							'device_id':gloab_device_id,
+							'device_id':my_device_id,
 							'zigbee_device_id' : ddd[p].Zigbee_deviceID,
 							'zigbee_device_address_H' : ddd[p].Zigbee_longAddress_H,
 							'zigbee_device_address_L' : ddd[p].Zigbee_longAddress_L,
