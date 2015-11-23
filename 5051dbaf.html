@@ -119,22 +119,7 @@
 
 						$scope.items = [];
 						$scope.items = items;
-						/*
-						for (var i in data ) {
-							var device = data[i];
-							if (device === null)
-								continue;
-							var product_id = device.id.split('/')[0];
-							var alias = device.alias ? device.alias : device.id;
-							$scope.items.push({
-								'alias' : alias,
-								'device_id' : device.id,
-								'product_id' : product_id,
-								'time' : device.created,
-								'state' : device.online
-							});
-						}
-						*/
+						
 						console.log($scope.items);
 
 					}).error(function(data) {
