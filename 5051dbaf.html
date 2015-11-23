@@ -17,11 +17,12 @@
 
 			// 得到设备ID
 			var device_id = getParameterByName('device_id');
+			var access_token = getParameterByName('access_token');
 			console.log(device_id);
+
 			var my_device_id = device_id;
 			var device_list = [];
-			var access_token = getParameterByName('access_token');
-
+			console.log("1");
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
 				$scope.access_token = access_token;
@@ -75,11 +76,6 @@
 
 				//刷新页面
 				$scope.reloadPage = function() {
-					//重新载入页面，刷新设备列表
-					//1.发送设备列表请求
-
-					//2.接收设备列表
-					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
 					console.log("refresh device");
 
 					$http.post('http://api.easylink.io/v1/device/devices', null, {
@@ -104,9 +100,8 @@
 				};
 
 			});
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
-			
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			if (my_device_id !== null) {
@@ -141,7 +136,7 @@
 				});
 
 				// 连接成功
-				function onConnect() {c
+				function onConnect() { c
 					var subtopic = device_id + '/out/#';
 					// Once a connection has been made, make a subscription and send a message.
 					// 向某个通道发送指令
@@ -207,13 +202,14 @@
 				}
 
 				//led on
-				
+
 				function led_on() {
 					var topic = device_id + '/in/write';
 					var commond = '{"11":"' + 'on' + '"}';
 					console.log("led_on");
 					client.publish(topic, commond);
 				}
+
 				//document.querySelector('#led_on').addEventListener('click', led_on);
 
 				//led off
@@ -222,6 +218,7 @@
 					var commond = '{"11":"' + 'off' + '"}';
 					client.publish(topic, commond);
 				}
+
 				//document.querySelector('#led_off').addEventListener('click', led_off);
 
 				//初始化 ZigBee 网络
@@ -230,6 +227,7 @@
 					var commond = '{"11":"' + 'factorynew' + '"}';
 					client.publish(topic, commond);
 				}
+
 				//document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
 				//设置 ZigBee 网络 permit join
@@ -238,6 +236,7 @@
 					var commond = '{"11":"' + 'permit' + '"}';
 					client.publish(topic, commond);
 				}
+
 				//document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
 				function zcb_devices() {
