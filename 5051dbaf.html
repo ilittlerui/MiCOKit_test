@@ -246,18 +246,6 @@
 						console.log("onConnectionLost:" + responseObject.errorMessage);
 				}
 
-				/*
-				function printAll(obj) {
-				for (var k in obj) {
-				var v = obj[k];
-				if ( typeof (v) != "object") {
-				document.writeln(k + "是" + v + "<br/>");
-				} else {
-				printAll(v);
-				}
-				}
-				}
-				*/
 				// 消息到达
 				function onMessageArrived(message) {
 					console.log(message.payloadString);
@@ -271,7 +259,7 @@
 						console.log(ddd);
 						console.log("2");
 
-						$scope.items = [];
+						//$scope.items = [];
 						for (var p in ddd)//遍历设备对象
 						{
 							console.log(ddd[p]);
