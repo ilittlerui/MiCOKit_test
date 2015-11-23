@@ -149,7 +149,7 @@
 			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
 				<ion-item ng-repeat="item in items"
 				item="item"
-				href="{{ item.product_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
+				href="{{ item.device_id }}.html?access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
 					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
 					<br>
 					<span class="item-note">ID : {{ item.device_id }}</span>
@@ -169,10 +169,6 @@
 			<div class="button-bar">
 				<a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
 				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
-			</div>
-			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_devices">Search Zigbee Devices</a>
-				<a class="button" style="background:black; color:white" id="zcb_test">test</a>
 			</div>
 		</div>
 		<script type="text/javascript" charset="UTF-8">
@@ -269,7 +265,7 @@
 							//Zigbee_deviceID
 
 							items.push({
-								'alias' : undefined,
+								'alias' : 1,
 								'device_id' : ddd[p].Zigbee_deviceID,
 								'device_address_H' : ddd[p].Zigbee_longAddress_H,
 								'device_address_L' : ddd[p].Zigbee_longAddress_L,
@@ -325,27 +321,6 @@
 
 				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
 				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
-
-				//获得 ZigBee 网络节点
-				function zcb_devices() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'nodes' + '"}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#zcb_devices').addEventListener('touchstart', zcb_devices);
-				document.querySelector('#zcb_devices').addEventListener('click', zcb_devices);
-
-				//ZigBeeControlBridge 测试方法
-				function zcb_test() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'test' + '"}';
-					client.publish(topic, commond);
-				}
-
-				// document.querySelector('#zcb_test').addEventListener('touchstart', zcb_test);
-				document.querySelector('#zcb_test').addEventListener('click', zcb_test);
-
 			}
 
 			// 日志打印在页面的部分
@@ -355,7 +330,6 @@
 					};
 				}(console.log.bind(console)));
 			console.error = console.debug = console.info = console.log;
-
 		</script>
 	</body>
 </html>
