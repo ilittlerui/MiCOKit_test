@@ -106,7 +106,7 @@
 
 					//2.接收设备列表
 					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
-					///console.log("refresh device");
+					console.log("refresh device");
 					$http.post('http://api.easylink.io/v1/device/devices', null, {
 						headers : {
 							'AUTHORIZATION' : "token " + access_token
@@ -257,7 +257,7 @@
 						console.log(ddd);
 						console.log("2");
 
-						//$scope.items = [];
+						$scope.items = [];
 						for (var p in ddd)//遍历设备对象
 						{
 							console.log(ddd[p]);
