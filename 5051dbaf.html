@@ -113,10 +113,10 @@
 							'AUTHORIZATION' : "token " + access_token
 						}
 					}).success(function(data) {
-						
+
 						console.log("post success");
 						console.log(items);
-						/*
+
 						$scope.items = [];
 						for (var i in data ) {
 							var device = data[i];
@@ -132,8 +132,8 @@
 								'state' : device.online
 							});
 						}
-						*/
-						
+						console.log($scope.items);
+
 					}).error(function(data) {
 						alert(data.error.message);
 						return;
