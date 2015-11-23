@@ -274,7 +274,8 @@
 							});
 
 						}
-						console.log(items);	//log devicelist
+						console.log(items);
+						//log devicelist
 					} else {
 
 					}
@@ -321,6 +322,12 @@
 
 				// document.querySelector('#zcb_permitjoin').addEventListener('touchstart', zcb_permitjoin);
 				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
+				
+				function zcb_devices() {
+					var topic = device_id + '/in/write';
+					var commond = '{"11":"' + 'nodes' + '"}';
+					client.publish(topic, commond);
+				}				
 			}
 
 			// 日志打印在页面的部分
