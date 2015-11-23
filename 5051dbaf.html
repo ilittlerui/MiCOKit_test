@@ -173,19 +173,9 @@
 					};
 				}(console.log.bind(console)));
 			console.error = console.debug = console.info = console.log;
-		</script>
 		
 		
-		<script type="text/javascript" charset="UTF-8">
-			function getParameterByName(name) {
-				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-			}
 
-			//这里可以从Wifi中获取一个相似的设备列表
-			//1.创建mqqt，获取设备列表信息
-			//2.每个设备都有一个
-			var access_token = getParameterByName('access_token');
 			var device_list = [];
 			//设备列表
 			var deviceLists = getParameterByName('device_list');
