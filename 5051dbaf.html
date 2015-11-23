@@ -16,7 +16,100 @@
 				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
-			// 得到设备ID
+
+		
+		
+
+			var device_list = [];
+
+			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
+				$scope.items = device_list;
+				$scope.access_token = access_token;
+
+				$scope.data = {
+					showDelete : false
+				};
+
+				$scope.listCanSwipe = true;
+				$scope.showPopup = function(item) {
+					var index = $scope.items.indexOf(item);
+					$scope.data = {
+
+					};
+
+					// An elaborate, custom popup
+					var myPopup = $ionicPopup.show({
+						template : '<input type="text" ng-model="data.alias">',
+						title : '',
+						subTitle : '修改名称',
+						scope : $scope,
+						buttons : [{
+							text : 'Cancel'
+						}, {
+							text : '<b>Save</b>',
+							type : 'button-positive',
+							onTap : function(e) {
+								if (!$scope.data.alias) {
+									e.preventDefault();
+								} else {
+									$http.post('http://api.easylink.io/v1/device/modify', {
+										device_id : item.device_id,
+										alias : $scope.data.alias
+									}, {
+										headers : {
+											'AUTHORIZATION' : "token " + access_token
+										}
+									}).success(function(data) {
+										$scope.items[index].alias = $scope.data.alias;
+										$ionicListDelegate.closeOptionButtons();
+
+									}).error(function(data) {
+										alert(data.error.message);
+										return;
+									});
+								}
+							}
+						}]
+					});
+				};
+
+				//刷新页面
+				$scope.reloadPage = function() {
+					//重新载入页面，刷新设备列表
+					//1.发送设备列表请求
+
+					//2.接收设备列表
+					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
+					console.log("refresh device");
+
+					$http.post('http://api.easylink.io/v1/device/devices', null, {
+						headers : {
+							'AUTHORIZATION' : "token " + access_token
+						}
+					}).success(function(data) {
+
+						console.log("post success");
+						console.log(items);
+
+						$scope.items = [];
+						$scope.items = items;
+
+						console.log($scope.items);
+
+					}).error(function(data) {
+						alert(data.error.message);
+						return;
+					});
+
+				};
+
+			});
+			
+			
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+						// 得到设备ID
 			var my_device_id = getParameterByName('device_id');
 			console.log(my_device_id);
 			
@@ -174,94 +267,6 @@
 					};
 				}(console.log.bind(console)));
 			console.error = console.debug = console.info = console.log;
-		
-		
-
-			var device_list = [];
-
-			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
-				$scope.items = device_list;
-				$scope.access_token = access_token;
-
-				$scope.data = {
-					showDelete : false
-				};
-
-				$scope.listCanSwipe = true;
-				$scope.showPopup = function(item) {
-					var index = $scope.items.indexOf(item);
-					$scope.data = {
-
-					};
-
-					// An elaborate, custom popup
-					var myPopup = $ionicPopup.show({
-						template : '<input type="text" ng-model="data.alias">',
-						title : '',
-						subTitle : '修改名称',
-						scope : $scope,
-						buttons : [{
-							text : 'Cancel'
-						}, {
-							text : '<b>Save</b>',
-							type : 'button-positive',
-							onTap : function(e) {
-								if (!$scope.data.alias) {
-									e.preventDefault();
-								} else {
-									$http.post('http://api.easylink.io/v1/device/modify', {
-										device_id : item.device_id,
-										alias : $scope.data.alias
-									}, {
-										headers : {
-											'AUTHORIZATION' : "token " + access_token
-										}
-									}).success(function(data) {
-										$scope.items[index].alias = $scope.data.alias;
-										$ionicListDelegate.closeOptionButtons();
-
-									}).error(function(data) {
-										alert(data.error.message);
-										return;
-									});
-								}
-							}
-						}]
-					});
-				};
-
-				//刷新页面
-				$scope.reloadPage = function() {
-					//重新载入页面，刷新设备列表
-					//1.发送设备列表请求
-
-					//2.接收设备列表
-					//3.将设备列表信息 push 到 items 中(items会被显示到ion-content中)
-					console.log("refresh device");
-
-					$http.post('http://api.easylink.io/v1/device/devices', null, {
-						headers : {
-							'AUTHORIZATION' : "token " + access_token
-						}
-					}).success(function(data) {
-
-						console.log("post success");
-						console.log(items);
-
-						$scope.items = [];
-						$scope.items = items;
-
-						console.log($scope.items);
-
-					}).error(function(data) {
-						alert(data.error.message);
-						return;
-					});
-
-				};
-
-			});
-			
 		</script>
 
 	</head>
