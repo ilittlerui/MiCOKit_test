@@ -10,7 +10,12 @@
 		<div class="bar bar-header bar-assertive">
 			<h1 class="title" id="device_id"></h1>
 		</div>
-
+		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+			<div class="button-bar">
+				<a class="button" style="background:white; color:black" id="led_on">On</a>
+				<a class="button" style="background:black; color:white" id="led_off">Off</a>
+			</div>
+		</div>
 		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
 		<script>
 			// 从url中获取某个参数的值
@@ -25,14 +30,13 @@
 			var zigbee_device_address_H = getParameterByName('zigbee_device_address_H');
 			var zigbee_device_address_L = getParameterByName('zigbee_device_address_L');
 			var zigbee_device_short_address = getParameterByName('zigbee_device_short_address');
-			
+
 			console.log("device_id:" + device_id);
 			console.log("zigbee_device_id:" + zigbee_device_id);
 			console.log("zigbee_device_address_H:" + zigbee_device_address_H);
 			console.log("zigbee_device_address_L:" + zigbee_device_address_L);
 			console.log("zigbee_device_short_address:" + zigbee_device_short_address);
-			
-			
+
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			if (device_id !== null) {
 				ez_connect(device_id);
@@ -99,6 +103,48 @@
 				}
 
 			}
+
+			//控制打开 led,发送什么格式????????
+			function led_on() {
+				var topic = device_id + '/in/write';
+				var message = {
+					"device_control" : {
+						"Zigbee_longAddress_H" : Zigbee_longAddress_H,
+						"Zigbee_longAddress_L" : Zigbee_longAddress_L,
+						"Zigbee_shortAddress" : Zigbee_shortAddress,
+						"Zigbee_deviceID" : Zigbee_deviceID,
+						"Zigbee_OnOff" : 1
+					}
+				};
+				message = JSON.stringify(message);
+				//var commond = '{"11":"' + 'on' + '"}';
+				console.log("led_on");
+				client.publish(topic, message);
+			}
+
+
+			document.querySelector('#led_on').addEventListener('click', led_on);
+
+			//led off
+			function led_off() {
+				var topic = device_id + '/in/write';
+				var message = {
+					"device_control" : {
+						"Zigbee_longAddress_H" : Zigbee_longAddress_H,
+						"Zigbee_longAddress_L" : Zigbee_longAddress_L,
+						"Zigbee_shortAddress" : Zigbee_shortAddress,
+						"Zigbee_deviceID" : Zigbee_deviceID,
+						"Zigbee_OnOff" : 0
+					}
+				};
+				message = JSON.stringify(message);
+				//var commond = '{"11":"' + 'on' + '"}';
+				console.log("led_off");
+				client.publish(topic, message);
+			}
+
+
+			document.querySelector('#led_off').addEventListener('click', led_off);
 
 			// 日志打印在页面的部分
 			console.log = ( function(old_funct) {
