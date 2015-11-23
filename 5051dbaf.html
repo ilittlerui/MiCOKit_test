@@ -23,6 +23,7 @@
 			//设备列表
 			var deviceLists = getParameterByName('device_list');
 
+/*
 			if (deviceLists !== null) {
 				try {
 					deviceLists = JSON.parse(deviceLists);
@@ -45,7 +46,7 @@
 					alert(e);
 				}
 			}
-
+*/
 			//模块
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
