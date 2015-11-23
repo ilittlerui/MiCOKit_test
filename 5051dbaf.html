@@ -21,6 +21,7 @@
 			console.log(device_id);
 			var my_device_id = device_id;
 			var device_list = [];
+			var access_token = getParameterByName('access_token');
 			
 		
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
@@ -119,7 +120,7 @@
 				// 获取access_token
 				// access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
 				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
-				var access_token = getParameterByName('access_token');
+				//var access_token = getParameterByName('access_token');
 
 				// websocket连接
 				// wsbroker:host
