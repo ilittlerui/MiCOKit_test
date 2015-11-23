@@ -15,6 +15,7 @@
 				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 			}
 
+			var gloab_device_id;
 			//这里可以从Wifi中获取一个相似的设备列表
 			//1.创建mqqt，获取设备列表信息
 			//2.每个设备都有一个
@@ -33,6 +34,7 @@
 							continue;
 						var product_id = device[0].split('/')[0];
 						var alias = device[3] ? device[3] : device[0];
+						gloab_device_id = device[0];
 						device_list.push({
 							'alias' : alias,
 							'device_id' : device[0],
@@ -119,7 +121,7 @@
 
 						$scope.items = [];
 						$scope.items = items;
-						
+
 						console.log($scope.items);
 
 					}).error(function(data) {
@@ -146,7 +148,7 @@
 			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
 				<ion-item ng-repeat="item in items"
 				item="item"
-				href="{{ item.device_id }}.html?access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
+				href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}" class="item-remove-animate">
 					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
 					<br>
 					<span class="item-note">ID : {{ item.device_id }}</span>
@@ -262,12 +264,13 @@
 							//Zigbee_deviceID
 
 							items.push({
-								'alias' : 1,
-								'device_id' : ddd[p].Zigbee_deviceID,
-								'device_address_H' : ddd[p].Zigbee_longAddress_H,
-								'device_address_L' : ddd[p].Zigbee_longAddress_L,
-								'device_short_address' : ddd[p].Zigbee_shortAddress,
-								'state' : 1
+							'alias' : 1,
+							'device_id':gloab_device_id,
+							'zigbee_device_id' : ddd[p].Zigbee_deviceID,
+							'zigbee_device_address_H' : ddd[p].Zigbee_longAddress_H,
+							'zigbee_device_address_L' : ddd[p].Zigbee_longAddress_L,
+							'zigbee_device_short_address' : ddd[p].Zigbee_shortAddress,
+							'state' : 1
 							});
 
 						}
