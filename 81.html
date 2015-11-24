@@ -32,7 +32,36 @@
     var zigbee_device_address_H = getParameterByName('zigbee_device_address_H');
     var zigbee_device_address_L = getParameterByName('zigbee_device_address_L');
     var zigbee_device_short_address = getParameterByName('zigbee_device_short_address');
-
+    var my_alisa;
+    switch (zigbee_device_id) {
+        case 257:
+            my_alisa = "Dimmable Light"
+            break;
+        case 258:
+            my_alisa = "Color Dimmable Light"
+            break;
+        case 81:
+            my_alisa = "Smart Plug"
+            break;
+        case 769:
+            my_alisa = "Thermostat"
+            break;
+        case 260:
+            my_alisa = "Dimmer Switch"
+            break;
+        case 261:
+            my_alisa = "Color Dimmer Switch"
+            break;
+        case 262:
+            my_alisa = "Light Sensor"
+            break;
+        case 263：
+        my_alisa = "Occupancy Sensor"
+        break;
+        default:
+            my_alisa = "Unknow Device"
+            break;
+    }
     console.log("device_id:" + device_id);
     console.log("zigbee_device_id:" + zigbee_device_id);
     console.log("zigbee_device_address_H:" + zigbee_device_address_H);

@@ -1,314 +1,329 @@
 <!DOCTYPE html>
 <html ng-app="ionicApp">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-		<title>My Gateway</title>
-		<link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
-		<script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script>
-		<script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
-		<script src="./js/jquery-2.1.3.js"></script>
-		<script type="text/javascript" charset="UTF-8">
-			// 从url中获取某个参数的值
-			function getParameterByName(name) {
-				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-			}
 
-			// 得到设备ID
-			var device_id = getParameterByName('device_id');
-			var access_token = getParameterByName('access_token');
-			console.log(device_id);
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>My Gateway</title>
+    <link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
+    <script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script>
+    <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
+    <script src="./js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" charset="UTF-8">
+    // 从url中获取某个参数的值
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
 
-			var my_device_id = device_id;
-			var device_list = [];
-			console.log("1");
+    // 得到设备ID
+    var device_id = getParameterByName('device_id');
+    var access_token = getParameterByName('access_token');
+    console.log(device_id);
 
-			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
-				$scope.items = device_list;
-				$scope.access_token = access_token;
+    var my_device_id = device_id;
+    var device_list = [];
+    console.log("1");
 
-				$scope.data = {
-					showDelete : false
-				};
+    angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
+        $scope.items = device_list;
+        $scope.access_token = access_token;
 
-				$scope.listCanSwipe = true;
-				$scope.showPopup = function(item) {
-					var index = $scope.items.indexOf(item);
-					$scope.data = {
+        $scope.data = {
+            showDelete: false
+        };
 
-					};
+        $scope.listCanSwipe = true;
+        $scope.showPopup = function(item) {
+            var index = $scope.items.indexOf(item);
+            $scope.data = {
 
-					// An elaborate, custom popup
-					var myPopup = $ionicPopup.show({
-						template : '<input type="text" ng-model="data.alias">',
-						title : '',
-						subTitle : '修改名称',
-						scope : $scope,
-						buttons : [{
-							text : 'Cancel'
-						}, {
-							text : '<b>Save</b>',
-							type : 'button-positive',
-							onTap : function(e) {
-								if (!$scope.data.alias) {
-									e.preventDefault();
-								} else {
-									$http.post('http://api.easylink.io/v1/device/modify', {
-										device_id : item.device_id,
-										alias : $scope.data.alias
-									}, {
-										headers : {
-											'AUTHORIZATION' : "token " + access_token
-										}
-									}).success(function(data) {
-										$scope.items[index].alias = $scope.data.alias;
-										$ionicListDelegate.closeOptionButtons();
+            };
 
-									}).error(function(data) {
-										alert(data.error.message);
-										return;
-									});
-								}
-							}
-						}]
-					});
-				};
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                template: '<input type="text" ng-model="data.alias">',
+                title: '',
+                subTitle: '修改名称',
+                scope: $scope,
+                buttons: [{
+                    text: 'Cancel'
+                }, {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        if (!$scope.data.alias) {
+                            e.preventDefault();
+                        } else {
+                            $http.post('http://api.easylink.io/v1/device/modify', {
+                                device_id: item.device_id,
+                                alias: $scope.data.alias
+                            }, {
+                                headers: {
+                                    'AUTHORIZATION': "token " + access_token
+                                }
+                            }).success(function(data) {
+                                $scope.items[index].alias = $scope.data.alias;
+                                $ionicListDelegate.closeOptionButtons();
 
-				//刷新页面
-				$scope.reloadPage = function() {
-					console.log("refresh device");
+                            }).error(function(data) {
+                                alert(data.error.message);
+                                return;
+                            });
+                        }
+                    }
+                }]
+            });
+        };
 
-					$http.post('http://api.easylink.io/v1/device/devices', null, {
-						headers : {
-							'AUTHORIZATION' : "token " + access_token
-						}
-					}).success(function(data) {
+        //刷新页面
+        $scope.reloadPage = function() {
+            console.log("refresh device");
 
-						console.log("post success");
-						console.log(items);
+            $http.post('http://api.easylink.io/v1/device/devices', null, {
+                headers: {
+                    'AUTHORIZATION': "token " + access_token
+                }
+            }).success(function(data) {
 
-						$scope.items = [];
-						$scope.items = items;
+                console.log("post success");
+                console.log(items);
 
-						console.log($scope.items);
+                $scope.items = [];
+                $scope.items = items;
 
-					}).error(function(data) {
-						alert(data.error.message);
-						return;
-					});
+                console.log($scope.items);
 
-				};
+            }).error(function(data) {
+                alert(data.error.message);
+                return;
+            });
 
-			});
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		</script>
+        };
 
-	</head>
+    });
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    </script>
+</head>
 
-	<body ng-controller="MyCtrl">
-		<ion-header-bar class="bar bar-header bar-assertive">
-			<h1 class="title" >Device List</h1>
-			<div class="buttons">
-				<button class="button ion-refresh" ng-click="reloadPage()"></button>
-			</div>
-		</ion-header-bar>
+<body ng-controller="MyCtrl">
+    <ion-header-bar class="bar bar-header bar-assertive">
+        <h1 class="title">Device List</h1>
+        <div class="buttons">
+            <button class="button ion-refresh" ng-click="reloadPage()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list can-swipe="listCanSwipe" show-delete="data.showDelete" show-reorder="data.showReorder">
+            <ion-item ng-repeat="item in items" item="item" href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}&zigbee_device_id={{ item.zigbee_device_id }}&zigbee_device_address_H={{ item.zigbee_device_address_H }}&zigbee_device_address_L={{ item.zigbee_device_address_L }}&zigbee_device_short_address={{ item.zigbee_device_short_address }}" class="item-remove-animate">
+                <i ng-if="item.state==1" class="icon ion-record positive"></i><i ng-if="item.state==0" class="icon ion-record assertive"></i> {{ item.alias }}
+                <br>
+                <span class="item-note">ID : {{ item.device_id }}</span>
+                <ion-option-button class="button-assertive" ng-click="showPopup(item)">
+                    Edit
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="led_on">On</a>
+            <a class="button" style="background:black; color:white" id="led_off">Off</a>
+        </div>
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
+            <a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
+        </div>
+    </div>
+    <script type="text/javascript" charset="UTF-8">
+    // 如果设备ID不为空，则执行连接MQTT的操作
+    console.log("2");
+    if (my_device_id !== null) {
+        console.log("3");
+        ez_connect(my_device_id);
+    }
+    console.log("4");
+    // 连接MQTT服务
+    console.log(device_id);
 
-		<ion-content >
-			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
-				<ion-item ng-repeat="item in items"
-				item="item"
-				href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}&zigbee_device_id={{ item.zigbee_device_id }}&zigbee_device_address_H={{ item.zigbee_device_address_H }}&zigbee_device_address_L={{ item.zigbee_device_address_L }}&zigbee_device_short_address={{ item.zigbee_device_short_address }}" class="item-remove-animate">
-					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
-					<br>
-					<span class="item-note">ID : {{ item.device_id }}</span>
-					<ion-option-button class="button-assertive"
-					ng-click="showPopup(item)">
-						Edit
-					</ion-option-button>
-				</ion-item>
-			</ion-list>
-		</ion-content>
+    function ez_connect(device_id) {
+        // 获取access_token
+        // access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
+        // 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
+        //var access_token = getParameterByName('access_token');
 
-		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
-			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="led_on">On</a>
-				<a class="button" style="background:black; color:white" id="led_off">Off</a>
-			</div>
-			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
-				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
-			</div>
-		</div>
+        // websocket连接
+        // wsbroker:host
+        // wsport:端口 默认1983
+        // Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
+        var wsbroker = "api.easylink.io";
+        //mqtt websocket enabled broker
+        var wsport = 1983;
+        // port for above
+        var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 12));
 
-		<script type="text/javascript" charset="UTF-8">
-			// 如果设备ID不为空，则执行连接MQTT的操作
-			console.log("2");
-			if (my_device_id !== null) {
-				console.log("3");
-				ez_connect(my_device_id);
-			}
-			console.log("4");
-			// 连接MQTT服务
-			console.log(device_id);
-			function ez_connect(device_id) {
-				// 获取access_token
-				// access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
-				// 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
-				//var access_token = getParameterByName('access_token');
+        // 基本参数配置
+        // 连接丢失所对应的callback函数
+        client.onConnectionLost = onConnectionLost;
+        // 消息到达所对应的callback函数
+        client.onMessageArrived = onMessageArrived;
+        // 连接成功所对应的callback函数
+        client.connect({
+            onSuccess: onConnect
+        });
 
-				// websocket连接
-				// wsbroker:host
-				// wsport:端口 默认1983
-				// Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
-				var wsbroker = "api.easylink.io";
-				//mqtt websocket enabled broker
-				var wsport = 1983;
-				// port for above
-				var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 12));
+        // 连接成功
+        function onConnect() {
+            var subtopic = device_id + '/out/#';
+            // Once a connection has been made, make a subscription and send a message.
+            // 向某个通道发送指令
+            // topic：通道
+            // commond：指令
+            client.publish = function(topic, commond) {
+                console.log("现在执行-->:" + commond);
+                message = new Paho.MQTT.Message(commond);
+                message.destinationName = topic;
+                client.send(message);
+            };
+            console.log("Have Connect");
+            console.log("ZigBee Devices List:");
+            zcb_devices();
 
-				// 基本参数配置
-				// 连接丢失所对应的callback函数
-				client.onConnectionLost = onConnectionLost;
-				// 消息到达所对应的callback函数
-				client.onMessageArrived = onMessageArrived;
-				// 连接成功所对应的callback函数
-				client.connect({
-					onSuccess : onConnect
-				});
+            client.subscribe(subtopic, {
+                qos: 0
+            });
+        }
 
-				// 连接成功
-				function onConnect() {
-					var subtopic = device_id + '/out/#';
-					// Once a connection has been made, make a subscription and send a message.
-					// 向某个通道发送指令
-					// topic：通道
-					// commond：指令
-					client.publish = function(topic, commond) {
-						console.log("现在执行-->:" + commond);
-						message = new Paho.MQTT.Message(commond);
-						message.destinationName = topic;
-						client.send(message);
-					};
-					console.log("Have Connect");
-					console.log("ZigBee Devices List:");
-					zcb_devices();
+        // 连接丢失
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0)
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
 
-					client.subscribe(subtopic, {
-						qos : 0
-					});
-				}
+        // 消息到达
+        function onMessageArrived(message) {
+            console.log(message.payloadString);
 
-				// 连接丢失
-				function onConnectionLost(responseObject) {
-					if (responseObject.errorCode !== 0)
-						console.log("onConnectionLost:" + responseObject.errorMessage);
-				}
+            var msgjson = $.parseJSON(message.payloadString);
+            console.log(msgjson);
+            if (msgjson.hasOwnProperty("devicelist")) {
 
-				// 消息到达
-				function onMessageArrived(message) {
-					console.log(message.payloadString);
+                var ddd = msgjson.devicelist;
+                console.log(ddd);
+                //console.log("2");
 
-					var msgjson = $.parseJSON(message.payloadString);
-					console.log(msgjson);
-					if (msgjson.hasOwnProperty("devicelist")) {
+                items = [];
+                //会导致连接丢失
+                for (var p in ddd) //遍历设备对象
+                {
+                    console.log(ddd[p]);
+                    var my_alisa;
+                    switch (ddd[p].Zigbee_deviceID) {
+                        case 257:
+                            my_alisa = "Dimmable Light";
+                            break;
+                        case 258:
+                            my_alisa = "Color Dimmable Light";
+                            break;
+                        case 81:
+                            my_alisa = "Smart Plug";
+                            break;
+                        case 769:
+                            my_alisa = "Thermostat";
+                            break;
+                        case 260:
+                            my_alisa = "Dimmer Switch";
+                            break;
+                        case 261:
+                            my_alisa = "Color Dimmer Switch";
+                            break;
+                        case 262:
+                            my_alisa = "Light Sensor";
+                            break;
+                        case 263：
+                        	my_alisa = "Occupancy Sensor";
+                        	break;
+                        default:
+                            my_alisa = "Unknow Device";
+                            break;
+                    }
 
-						var ddd = msgjson.devicelist;
-						console.log(ddd);
-						//console.log("2");
+                    items.push({
+                        'alias': my_alisa,
+                        'device_id': my_device_id,
+                        'zigbee_device_id': ddd[p].Zigbee_deviceID,
+                        'zigbee_device_address_H': ddd[p].Zigbee_longAddress_H,
+                        'zigbee_device_address_L': ddd[p].Zigbee_longAddress_L,
+                        'zigbee_device_short_address': ddd[p].Zigbee_shortAddress,
+                        'state': 1
+                    });
 
-						items = [];
-						//会导致连接丢失
-						for (var p in ddd)//遍历设备对象
-						{
-							console.log(ddd[p]);
-							var my_alisa ;
-							switch(ddd[p].Zigbee_deviceID)
-							{
-								case 257:
-									my_alisa = "Dimmable Light"
-									break
-								default:
-									my_alisa = "Unknow Device"
-									break;
-							}
+                }
+                console.log(items);
 
-							items.push({
-								'alias' : my_alisa,
-								'device_id' : my_device_id,
-								'zigbee_device_id' : ddd[p].Zigbee_deviceID,
-								'zigbee_device_address_H' : ddd[p].Zigbee_longAddress_H,
-								'zigbee_device_address_L' : ddd[p].Zigbee_longAddress_L,
-								'zigbee_device_short_address' : ddd[p].Zigbee_shortAddress,
-								'state' : 1
-							});
+                console.log("5");
+                //log devicelist
+            } else {
 
-						}
-						console.log(items);
+            }
 
-						console.log("5");
-						//log devicelist
-					} else {
+        }
 
-					}
+        //led on
 
-				}
+        function led_on() {
+            var topic = device_id + '/in/write';
+            var commond = '{"11":"' + 'on' + '"}';
+            console.log("led_on");
+            client.publish(topic, commond);
+        }
 
-				//led on
+        document.querySelector('#led_on').addEventListener('click', led_on);
 
-				function led_on() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'on' + '"}';
-					console.log("led_on");
-					client.publish(topic, commond);
-				}
+        //led off
+        function led_off() {
+            var topic = device_id + '/in/write';
+            var commond = '{"11":"' + 'off' + '"}';
+            client.publish(topic, commond);
+        }
 
-				document.querySelector('#led_on').addEventListener('click', led_on);
+        document.querySelector('#led_off').addEventListener('click', led_off);
 
-				//led off
-				function led_off() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'off' + '"}';
-					client.publish(topic, commond);
-				}
+        //初始化 ZigBee 网络
+        function zcb_factorynew() {
+            var topic = device_id + '/in/write';
+            var commond = '{"11":"' + 'factorynew' + '"}';
+            client.publish(topic, commond);
+        }
 
-				document.querySelector('#led_off').addEventListener('click', led_off);
+        document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
-				//初始化 ZigBee 网络
-				function zcb_factorynew() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'factorynew' + '"}';
-					client.publish(topic, commond);
-				}
+        //设置 ZigBee 网络 permit join
+        function zcb_permitjoin() {
+            var topic = device_id + '/in/write';
+            var commond = '{"11":"' + 'permit' + '"}';
+            client.publish(topic, commond);
+        }
 
-				document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
+        document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
-				//设置 ZigBee 网络 permit join
-				function zcb_permitjoin() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'permit' + '"}';
-					client.publish(topic, commond);
-				}
+        function zcb_devices() {
+            var topic = device_id + '/in/write';
+            var commond = '{"11":"' + 'nodes' + '"}';
+            client.publish(topic, commond);
+        }
 
-				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
+    }
 
-				function zcb_devices() {
-					var topic = device_id + '/in/write';
-					var commond = '{"11":"' + 'nodes' + '"}';
-					client.publish(topic, commond);
-				}
+    // 日志打印在页面的部分
+    console.log = (function(old_funct) {
+        return function(text) {
+            old_funct(text);
+        };
+    }(console.log.bind(console)));
+    console.error = console.debug = console.info = console.log;
+    </script>
+</body>
 
-			}
-
-			// 日志打印在页面的部分
-			console.log = ( function(old_funct) {
-					return function(text) {
-						old_funct(text);
-					};
-				}(console.log.bind(console)));
-			console.error = console.debug = console.info = console.log;
-
-		</script>
-	</body>
 </html>
