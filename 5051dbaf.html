@@ -23,7 +23,7 @@
 			var my_device_id = device_id;
 			var device_list = [];
 			console.log("1");
-			
+
 			angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 				$scope.items = device_list;
 				$scope.access_token = access_token;
@@ -103,7 +103,46 @@
 			});
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		</script>
 
+	</head>
+
+	<body ng-controller="MyCtrl">
+		<ion-header-bar class="bar bar-header bar-assertive">
+			<h1 class="title" >Device List</h1>
+			<div class="buttons">
+				<button class="button ion-refresh" ng-click="reloadPage()"></button>
+			</div>
+		</ion-header-bar>
+
+		<ion-content >
+			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
+				<ion-item ng-repeat="item in items"
+				item="item"
+				href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}&zigbee_device_id={{ item.zigbee_device_id }}&zigbee_device_address_H={{ item.zigbee_device_address_H }}&zigbee_device_address_L={{ item.zigbee_device_address_L }}&zigbee_device_short_address={{ item.zigbee_device_short_address }}" class="item-remove-animate">
+					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
+					<br>
+					<span class="item-note">ID : {{ item.device_id }}</span>
+					<ion-option-button class="button-assertive"
+					ng-click="showPopup(item)">
+						Edit
+					</ion-option-button>
+				</ion-item>
+			</ion-list>
+		</ion-content>
+
+		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+			<div class="button-bar">
+				<a class="button" style="background:white; color:black" id="led_on">On</a>
+				<a class="button" style="background:black; color:white" id="led_off">Off</a>
+			</div>
+			<div class="button-bar">
+				<a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
+				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
+			</div>
+		</div>
+
+		<script type="text/javascript" charset="UTF-8">
 			// 如果设备ID不为空，则执行连接MQTT的操作
 			console.log("2");
 			if (my_device_id !== null) {
@@ -259,44 +298,7 @@
 					};
 				}(console.log.bind(console)));
 			console.error = console.debug = console.info = console.log;
+
 		</script>
-
-	</head>
-
-	<body ng-controller="MyCtrl">
-		<ion-header-bar class="bar bar-header bar-assertive">
-			<h1 class="title" >Device List</h1>
-			<div class="buttons">
-				<button class="button ion-refresh" ng-click="reloadPage()"></button>
-			</div>
-		</ion-header-bar>
-
-		<ion-content >
-			<ion-list can-swipe="listCanSwipe"  show-delete="data.showDelete" show-reorder="data.showReorder">
-				<ion-item ng-repeat="item in items"
-				item="item"
-				href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}&zigbee_device_id={{ item.zigbee_device_id }}&zigbee_device_address_H={{ item.zigbee_device_address_H }}&zigbee_device_address_L={{ item.zigbee_device_address_L }}&zigbee_device_short_address={{ item.zigbee_device_short_address }}" class="item-remove-animate">
-					<i ng-if="item.state==1" class="icon ion-record positive" ></i><i ng-if="item.state==0" class="icon ion-record assertive" ></i> {{ item.alias }}
-					<br>
-					<span class="item-note">ID : {{ item.device_id }}</span>
-					<ion-option-button class="button-assertive"
-					ng-click="showPopup(item)">
-						Edit
-					</ion-option-button>
-				</ion-item>
-			</ion-list>
-		</ion-content>
-
-		<div class="bar-footer" style="bottom:0;position:absolute;width:100%">
-			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="led_on">On</a>
-				<a class="button" style="background:black; color:white" id="led_off">Off</a>
-			</div>
-			<div class="button-bar">
-				<a class="button" style="background:white; color:black" id="zcb_factorynew">Factory New GateWay</a>
-				<a class="button" style="background:black; color:white" id="zcb_permitjoin">Permit Join</a>
-			</div>
-		</div>
-
 	</body>
 </html>
