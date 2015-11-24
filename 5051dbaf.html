@@ -273,7 +273,7 @@
 					client.publish(topic, commond);
 				}
 
-				//document.querySelector('#led_on').addEventListener('click', led_on);
+				document.querySelector('#led_on').addEventListener('click', led_on);
 
 				//led off
 				function led_off() {
@@ -282,7 +282,7 @@
 					client.publish(topic, commond);
 				}
 
-				//document.querySelector('#led_off').addEventListener('click', led_off);
+				document.querySelector('#led_off').addEventListener('click', led_off);
 
 				//初始化 ZigBee 网络
 				function zcb_factorynew() {
@@ -291,7 +291,7 @@
 					client.publish(topic, commond);
 				}
 
-				//document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
+				document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
 				//设置 ZigBee 网络 permit join
 				function zcb_permitjoin() {
@@ -300,7 +300,7 @@
 					client.publish(topic, commond);
 				}
 
-				//document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
+				document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
 				function zcb_devices() {
 					var topic = device_id + '/in/write';
