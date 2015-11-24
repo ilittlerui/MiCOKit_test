@@ -119,7 +119,7 @@
             <ion-item ng-repeat="item in items" item="item" href="{{ item.zigbee_device_id }}.html?device_id={{ item.device_id }}&access_token={{ access_token }}&alias={{ item.alias }}&zigbee_device_id={{ item.zigbee_device_id }}&zigbee_device_address_H={{ item.zigbee_device_address_H }}&zigbee_device_address_L={{ item.zigbee_device_address_L }}&zigbee_device_short_address={{ item.zigbee_device_short_address }}" class="item-remove-animate">
                 <i ng-if="item.state==1" class="icon ion-record positive"></i><i ng-if="item.state==0" class="icon ion-record assertive"></i> {{ item.alias }}
                 <br>
-                <span class="item-note">Address : 0x{{zigbee_device_short_address.toString(16)}}</span>
+                <span class="item-note">Address : 0x{{item.zigbee_device_short_address.toString(16)}}</span>
                 <ion-option-button class="button-assertive" ng-click="showPopup(item)">
                     Edit
                 </ion-option-button>
