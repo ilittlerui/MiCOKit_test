@@ -214,18 +214,27 @@
 					console.log(msgjson);
 					if (msgjson.hasOwnProperty("devicelist")) {
 
-						console.log("1");
 						var ddd = msgjson.devicelist;
 						console.log(ddd);
-						console.log("2");
+						//console.log("2");
 
 						items = [];
 						//会导致连接丢失
 						for (var p in ddd)//遍历设备对象
 						{
 							console.log(ddd[p]);
+							var my_alisa ;
+							switch(ddd[p].Zigbee_deviceID)
+							{
+								case 257:
+									my_alisa = "Dimmable Light"
+
+								default:
+									break;
+							}
+							
 							items.push({
-								'alias' : 1,
+								'alias' : my_alisa,
 								'device_id' : my_device_id,
 								'zigbee_device_id' : ddd[p].Zigbee_deviceID,
 								'zigbee_device_address_H' : ddd[p].Zigbee_longAddress_H,
