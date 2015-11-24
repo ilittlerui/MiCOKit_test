@@ -237,25 +237,6 @@
 						}
 						console.log(items);
 
-						$http.post('http://api.easylink.io/v1/device/devices', null, {
-							headers : {
-								'AUTHORIZATION' : "token " + access_token
-							}
-						}).success(function(data) {
-
-							console.log("post success");
-							console.log(items);
-
-							$scope.items = [];
-							$scope.items = items;
-
-							console.log($scope.items);
-
-						}).error(function(data) {
-							alert(data.error.message);
-							return;
-						});
-
 						console.log("5");
 						//log devicelist
 					} else {
