@@ -13,9 +13,15 @@
         <h1 class="title" id="device_id"></h1>
     </div>
     <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+        <p>plug 1</p>
         <div class="button-bar">
-            <a class="button" style="background:white; color:black" id="led_on">On</a>
-            <a class="button" style="background:black; color:white" id="led_off">Off</a>
+            <a class="button" style="background:white; color:black" id="led_on1">On</a>
+            <a class="button" style="background:black; color:white" id="led_off1">Off</a>
+        </div>
+        <p>plug 2</p>
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="led_on2">On</a>
+            <a class="button" style="background:black; color:white" id="led_off2">Off</a>
         </div>
     </div>
     <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
@@ -134,7 +140,7 @@
         }
 
         //控制打开 led,发送什么格式????????
-        function led_on() {
+        function led_on1() {
             var topic = device_id + '/in/write';
             var message = {
                 "device_control": {
@@ -142,21 +148,20 @@
                     "Zigbee_longAddress_L": zigbee_device_address_L,
                     "Zigbee_shortAddress": zigbee_device_short_address,
                     "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_endpointID":1,
                     "Zigbee_OnOff": 1
                 }
             };
             message = JSON.stringify(message);
             //var commond = '{"11":"' + 'on' + '"}';
-            console.log("led_on");
+            console.log("led_on1");
             console.log(message);
             client.publish(topic, message);
         }
-
-
-        document.querySelector('#led_on').addEventListener('click', led_on);
+        document.querySelector('#led_on1').addEventListener('click', led_on1);
 
         //led off
-        function led_off() {
+        function led_off1() {
             var topic = device_id + '/in/write';
             var message = {
                 "device_control": {
@@ -164,19 +169,58 @@
                     "Zigbee_longAddress_L": zigbee_device_address_L,
                     "Zigbee_shortAddress": zigbee_device_short_address,
                     "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_endpointID":1,
                     "Zigbee_OnOff": 0
                 }
             };
             message = JSON.stringify(message);
             //var commond = '{"11":"' + 'on' + '"}';
-            console.log("led_off");
+            console.log("led_off1");
             console.log(message);
             client.publish(topic, message);
         }
+        document.querySelector('#led_off1').addEventListener('click', led_off1);
 
+        function led_on2() {
+            var topic = device_id + '/in/write';
+            var message = {
+                "device_control": {
+                    "Zigbee_longAddress_H": zigbee_device_address_H,
+                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                    "Zigbee_shortAddress": zigbee_device_short_address,
+                    "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_endpointID":2,
+                    "Zigbee_OnOff": 1
+                }
+            };
+            message = JSON.stringify(message);
+            //var commond = '{"11":"' + 'on' + '"}';
+            console.log("led_on2");
+            console.log(message);
+            client.publish(topic, message);
+        }
+        document.querySelector('#led_on2').addEventListener('click', led_on2);
 
-        document.querySelector('#led_off').addEventListener('click', led_off);
-
+        //led off
+        function led_off2() {
+            var topic = device_id + '/in/write';
+            var message = {
+                "device_control": {
+                    "Zigbee_longAddress_H": zigbee_device_address_H,
+                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                    "Zigbee_shortAddress": zigbee_device_short_address,
+                    "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_endpointID":2,
+                    "Zigbee_OnOff": 0
+                }
+            };
+            message = JSON.stringify(message);
+            //var commond = '{"11":"' + 'on' + '"}';
+            console.log("led_off2");
+            console.log(message);
+            client.publish(topic, message);
+        }
+        document.querySelector('#led_off2').addEventListener('click', led_off2);
     }
 
     // 日志打印在页面的部分
