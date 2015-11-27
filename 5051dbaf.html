@@ -128,7 +128,7 @@
     </ion-content>
     <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
         <div class="button-bar">
-            <a class="button" style="background:white; color:black" id="led_on">On</a>
+            <a class="button" style="background:white; color:black" id="led_on">Node In Flash</a>
             <a class="button" style="background:black; color:white" id="led_off">Off</a>
         </div>
         <div class="button-bar">
@@ -273,8 +273,8 @@
 
         function led_on() {
             var topic = device_id + '/in/write';
-            var commond = '{"11":"' + 'on' + '"}';
-            console.log("led_on");
+            var commond = '{"11":"' + 'flashnode' + '"}';
+            console.log("flashnode");
             client.publish(topic, commond);
         }
 
