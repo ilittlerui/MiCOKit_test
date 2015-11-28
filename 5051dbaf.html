@@ -255,7 +255,7 @@
                         'zigbee_device_address_H': ddd[p].Zigbee_longAddress_H,
                         'zigbee_device_address_L': ddd[p].Zigbee_longAddress_L,
                         'zigbee_device_short_address': ddd[p].Zigbee_shortAddress,
-                        'state': 1
+                        'state': ddd[p].Zigbee_deviceStatus
                     });
 
                 }
@@ -277,7 +277,6 @@
             console.log("flashnode");
             client.publish(topic, commond);
         }
-
         document.querySelector('#led_on').addEventListener('click', led_on);
 
         //led off
@@ -286,7 +285,6 @@
             var commond = '{"11":"' + 'off' + '"}';
             client.publish(topic, commond);
         }
-
         document.querySelector('#led_off').addEventListener('click', led_off);
 
         //初始化 ZigBee 网络
@@ -295,7 +293,6 @@
             var commond = '{"11":"' + 'factorynew' + '"}';
             client.publish(topic, commond);
         }
-
         document.querySelector('#zcb_factorynew').addEventListener('click', zcb_factorynew);
 
         //设置 ZigBee 网络 permit join
@@ -304,7 +301,6 @@
             var commond = '{"11":"' + 'permit' + '"}';
             client.publish(topic, commond);
         }
-
         document.querySelector('#zcb_permitjoin').addEventListener('click', zcb_permitjoin);
 
         function zcb_devices() {
