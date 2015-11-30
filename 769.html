@@ -180,7 +180,7 @@
                     if (ddd[p].Zigbee_clusterID == 1026)
                         document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData / 1000 + '.' + ddd[p].Zigbee_attributeData%1000;
                     else if (ddd[p].Zigbee_clusterID == 1029)
-                        document.getElementById("humidity").innerHTML = ddd[p].Zigbee_attributeData/100 +'.'ddd[p].Zigbee_attributeData%100+'%';
+                        document.getElementById("humidity").innerHTML = ddd[p].Zigbee_attributeData/100 + '.'ddd[p].Zigbee_attributeData%100 + '%';
                     else
                         console.log("attributeID is error");
 
