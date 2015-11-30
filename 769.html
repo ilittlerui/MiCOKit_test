@@ -12,10 +12,19 @@
     <div class="bar bar-header bar-assertive">
         <h1 class="title" id="device_id"></h1>
     </div>
+
+    <div>
+        Thermostat(Sensors)
+        Temperature:
+        <p id = "temperature" ></p>
+        Humidity:
+        <p id = "humidity"></p>
+    </div>
+
     <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
         <div class="button-bar">
-            <a class="button" style="background:white; color:black" id="led_on">On</a>
-            <a class="button" style="background:black; color:white" id="led_off">Off</a>
+            <a class="button" style="background:white; color:black" id="get_temperature">Get Temperature</a>
+            <a class="button" style="background:black; color:white" id="get_humidity">Get humidity</a>
         </div>
     </div>
     <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
@@ -131,51 +140,97 @@
         function onMessageArrived(message) {
             // console.log(message.topic + ': ' +  message.payloadString);
             console.log('消息到达: ' + message.payloadString);
+
+            if (msgjson.hasOwnProperty("attributeRepoet")) {
+
+                var ddd = msgjson.devicelist;
+                console.log(ddd);
+                //console.log("2");
+
+                items = [];
+                for (var p in ddd) //遍历设备对象
+                {
+                    console.log(ddd[p]);
+                    console.log(ddd[p].Zigbee_shortAddress);
+                    console.log(ddd[p].Zigbee_endpointID);
+                    console.log(ddd[p].Zigbee_clusterID);
+                    console.log(ddd[p].Zigbee_attributeID);
+                    console.log(ddd[p].Zigbee_attributeType);
+                    console.log(ddd[p].Zigbee_attributeData);
+/*
+                    items.push({
+                        'alias': my_alisa,
+                        'device_id': my_device_id,
+                        'zigbee_device_id': ddd[p].Zigbee_deviceID,
+                        'zigbee_device_address_H': ddd[p].Zigbee_longAddress_H,
+                        'zigbee_device_address_L': ddd[p].Zigbee_longAddress_L,
+                        'zigbee_device_short_address': ddd[p].Zigbee_shortAddress,
+                        'state': ddd[p].Zigbee_deviceStatus
+                    });
+*/                
+                if(ddd[p].Zigbee_attributeID == 1026)
+                    document.getElementById("temperature").innerHTML=ddd[p].Zigbee_attributeData;
+                else if(ddd[p].Zigbee_attributeID == 1029)
+                    document.getElementById("temperature").innerHTML=ddd[p].Zigbee_attributeData;
+                else
+                    console.log("attributeID is error");
+
+                console.log("5");
+                }
+
+                //log devicelist
+            } else {
+
+            }
+
+
+
+
         }
 
         //控制打开 led,发送什么格式????????
-        function led_on() {
+        function get_temperature() {
             var topic = device_id + '/in/write';
             var message = {
-                "device_control": {
-                    "Zigbee_longAddress_H": zigbee_device_address_H,
-                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                "get_report": {
                     "Zigbee_shortAddress": zigbee_device_short_address,
                     "Zigbee_deviceID": zigbee_device_id,
-                    "Zigbee_OnOff": 1
+                    "Zigbee_endpointID":1,
+                    "Zigbee_clusterID":1026,
+                    "Zigbee_attributeID":0
                 }
             };
             message = JSON.stringify(message);
+
             //var commond = '{"11":"' + 'on' + '"}';
-            console.log("led_on");
+            console.log("get_temperature");
             console.log(message);
             client.publish(topic, message);
         }
 
-
-        document.querySelector('#led_on').addEventListener('click', led_on);
+        document.querySelector('#get_temperature').addEventListener('click', get_temperature);
 
         //led off
-        function led_off() {
+        function get_humidity() {
             var topic = device_id + '/in/write';
             var message = {
-                "device_control": {
-                    "Zigbee_longAddress_H": zigbee_device_address_H,
-                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                "get_report": {
                     "Zigbee_shortAddress": zigbee_device_short_address,
                     "Zigbee_deviceID": zigbee_device_id,
-                    "Zigbee_OnOff": 0
+                    "Zigbee_endpointID":1,
+                    "Zigbee_clusterID":1029,
+                    "Zigbee_attributeID":0
                 }
             };
             message = JSON.stringify(message);
             //var commond = '{"11":"' + 'on' + '"}';
-            console.log("led_off");
+            console.log("get_humidity");
             console.log(message);
             client.publish(topic, message);
         }
 
 
-        document.querySelector('#led_off').addEventListener('click', led_off);
+        document.querySelector('#get_humidity').addEventListener('click', get_humidity);
 
     }
 
