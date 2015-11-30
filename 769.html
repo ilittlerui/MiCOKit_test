@@ -31,7 +31,6 @@
             <a class="button" style="background:white; color:black" id="reportlist">reportlist</a>
         </div>
     </div>
-
     <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
     <script src="./js/jquery-2.1.3.js"></script>
     <script>
@@ -179,9 +178,9 @@
                                         });
                     */
                     if (ddd[p].Zigbee_clusterID == 1026)
-                        document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData;
+                        document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData / 1000 + '.' + ddd[p].Zigbee_attributeData%1000;
                     else if (ddd[p].Zigbee_clusterID == 1029)
-                        document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData;
+                        document.getElementById("humidity").innerHTML = ddd[p].Zigbee_attributeData/100 +'.'ddd[p].Zigbee_attributeData%100+'%';
                     else
                         console.log("attributeID is error");
 
