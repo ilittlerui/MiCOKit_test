@@ -145,9 +145,11 @@
         function onMessageArrived(message) {
             // console.log(message.topic + ': ' +  message.payloadString);
             console.log('消息到达: ' + message.payloadString);
-            
+            console.log("0");
             var msgjson = $.parseJSON(message.payloadString);
+            console.log("1");
             console.log(msgjson);
+
             if (msgjson.hasOwnProperty("attributeRepoet")) {
 
                 var ddd = msgjson.attributeRepoet;
