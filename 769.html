@@ -178,9 +178,9 @@
                                             'state': ddd[p].Zigbee_deviceStatus
                                         });
                     */
-                    if (ddd[p].Zigbee_attributeID == 1026)
+                    if (ddd[p].Zigbee_clusterID == 1026)
                         document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData;
-                    else if (ddd[p].Zigbee_attributeID == 1029)
+                    else if (ddd[p].Zigbee_clusterID == 1029)
                         document.getElementById("temperature").innerHTML = ddd[p].Zigbee_attributeData;
                     else
                         console.log("attributeID is error");
