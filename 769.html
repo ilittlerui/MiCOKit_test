@@ -31,7 +31,7 @@
             <a class="button" style="background:white; color:black" id="reportlist">reportlist</a>
         </div>
     </div>
-    
+
     <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
     <script>
     // 从url中获取某个参数的值
@@ -148,9 +148,9 @@
 
             if (msgjson.hasOwnProperty("attributeRepoet")) {
 
-                var ddd = msgjson.devicelist;
+                var ddd = msgjson.attributeRepoet;
                 console.log(ddd);
-                //console.log("2");
+                console.log("2");
 
                 items = [];
                 for (var p in ddd) //遍历设备对象
@@ -212,7 +212,6 @@
             console.log(message);
             client.publish(topic, message);
         }
-
         document.querySelector('#get_temperature').addEventListener('click', get_temperature);
 
         //led off
@@ -228,7 +227,6 @@
                 }
             };
             message = JSON.stringify(message);
-            //var commond = '{"11":"' + 'on' + '"}';
             console.log("get_humidity");
             console.log(message);
             client.publish(topic, message);
