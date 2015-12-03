@@ -244,7 +244,12 @@
                             my_alisa = "Occupancy Sensor";
                             break;
                         case 1026:
-                            my_alisa = "IAS ZONE";
+                            if(ddd[p].ZigBee_customData == 0x0015)
+                                my_alisa = "门磁";
+                            else if(ddd[p].ZigBee_customData == 0x002D)
+                                my_alisa = "PIR";
+                            else
+                                my_alisa = "IAS ZONE";
                             break;
                         default:
                             my_alisa = "Unknow Device";
