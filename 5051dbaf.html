@@ -271,7 +271,14 @@
 
                 console.log("5");
                 //log devicelist
-            } else {
+            } else if(msgjson.hasOwnProperty("zonestatus"))
+            {
+
+                    alert(msgjson.zonestatus.Zigbee_endpoint);
+                    
+
+            }
+            else {
 
             }
 
