@@ -274,8 +274,18 @@
             } else if(msgjson.hasOwnProperty("zonestatus"))
             {
 
-                    alert(msgjson.zonestatus.Zigbee_endpoint);
-                    
+                    //alert(msgjson.zonestatus.Zigbee_endpoint);
+                    //alert(msgjson.zonestatus.Zigbee_zoneStatus);
+                    if(msgjson.zonestatus.Zigbee_zoneStatus==1)
+                        alert("门开了");
+                    else if(msgjson.zonestatus.Zigbee_zoneStatus==0)
+                    {
+                        alert("门关了");  
+                    }
+                    else
+                    {
+
+                    }
 
             }
             else {
