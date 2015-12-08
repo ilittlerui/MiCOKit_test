@@ -243,10 +243,10 @@
                         case 263:
                             my_alisa = "Occupancy Sensor";
                             break;
-                        case 1026:    
-                            if(ddd[p].Zigbee_customData == 0x0015)
+                        case 1026:
+                            if (ddd[p].Zigbee_customData == 0x0015)
                                 my_alisa = "门磁";
-                            else if(ddd[p].Zigbee_customData == 0x002D)
+                            else if (ddd[p].Zigbee_customData == 0x002D)
                                 my_alisa = "PIR";
                             else
                                 my_alisa = "IAS ZONE";
@@ -271,32 +271,25 @@
 
                 console.log("5");
                 //log devicelist
-            } else if(msgjson.hasOwnProperty("zonestatus"))
-            {
+            } else if (msgjson.hasOwnProperty("zonestatus")) {
 
-                    //alert(msgjson.zonestatus.Zigbee_endpoint);
-                    //alert(msgjson.zonestatus.Zigbee_zoneStatus);
-                    if(msgjson.zonestatus.Zigbee_zoneId==0)
-                    {
-                    if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==1)
+                //alert(msgjson.zonestatus.Zigbee_endpoint);
+                //alert(msgjson.zonestatus.Zigbee_zoneStatus);
+                if (msgjson.zonestatus.Zigbee_zoneId == 1) {
+                    if ((msgjson.zonestatus.Zigbee_zoneStatus & 0x01) == 1)
                         alert("门开了");
-                    else if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==0)
-                    {
-                        alert("门关了");  
-                    }
-                    else
-                    {
+                    else if ((msgjson.zonestatus.Zigbee_zoneStatus & 0x01) == 0) {
+                        alert("门关了");
+                    } else {
 
                     }
                 }
-                    if(msgjson.zonestatus.Zigbee_zoneId==1)
-                    {
-                        if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==1)
-                            alert("贼出没！！！！！！！！！！！！！！！11");
-                    }
+                if (msgjson.zonestatus.Zigbee_zoneId == 2) {
+                    if ((msgjson.zonestatus.Zigbee_zoneStatus & 0x01) == 1)
+                        alert("贼出没！！！！！！！！！！！！！！！11");
+                }
 
-            }
-            else {
+            } else {
 
             }
 
