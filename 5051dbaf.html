@@ -276,6 +276,8 @@
 
                     //alert(msgjson.zonestatus.Zigbee_endpoint);
                     //alert(msgjson.zonestatus.Zigbee_zoneStatus);
+                    if(msgjson.zonestatus.Zigbee_zoneId==0)
+                    {
                     if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==1)
                         alert("门开了");
                     else if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==0)
@@ -285,6 +287,12 @@
                     else
                     {
 
+                    }
+                }
+                    if(msgjson.zonestatus.Zigbee_zoneId==1)
+                    {
+                        if((msgjson.zonestatus.Zigbee_zoneStatus & 0x01)==1)
+                            alert("贼出没！！！！！！！！！！！！！！！11");
                     }
 
             }
