@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>OnOff Switch</title>
+    <link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bar bar-header bar-assertive">
+        <h1 class="title" id="device_id"></h1>
+    </div>
+    <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="led_on">On</a>
+            <a class="button" style="background:black; color:white" id="led_off">Off</a>
+        </div>
+    </div>
+    <script src="http://api.easylink.io/assets/js/mqttws31.js"></script>
+    <script>
+    // 从url中获取某个参数的值
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    //获取设备信息
+    var device_id = getParameterByName('device_id');
+    var zigbee_device_id = getParameterByName('zigbee_device_id');
+    var zigbee_device_address_H = getParameterByName('zigbee_device_address_H');
+    var zigbee_device_address_L = getParameterByName('zigbee_device_address_L');
+    var zigbee_device_short_address = getParameterByName('zigbee_device_short_address');
+    var my_alisa;
+    switch (zigbee_device_id) {
+        case 257:
+            my_alisa = "Dimmable Light"
+            break;
+        case 258:
+            my_alisa = "Color Dimmable Light"
+            break;
+        case 81:
+            my_alisa = "Smart Plug"
+            break;
+        case 769:
+            my_alisa = "Thermostat"
+            break;
+        case 260:
+            my_alisa = "Dimmer Switch"
+            break;
+                    case 0:
+            my_alisa = "OnOff Switch"
+            break;
+        case 261:
+            my_alisa = "Color Dimmer Switch"
+            break;
+        case 262:
+            my_alisa = "Light Sensor"
+            break;
+        case 263:
+            my_alisa = "Occupancy Sensor"
+            break;
+        default:
+            my_alisa = "Unknow Device"
+            break;
+    }
+    console.log("device_id:" + device_id);
+    console.log("zigbee_device_id:" + zigbee_device_id);
+    console.log("zigbee_device_address_H:" + zigbee_device_address_H);
+    console.log("zigbee_device_address_L:" + zigbee_device_address_L);
+    console.log("zigbee_device_short_address:" + zigbee_device_short_address);
+
+    // 如果设备ID不为空，则执行连接MQTT的操作
+    if (device_id !== null) {
+        ez_connect(device_id);
+    }
+
+    // 连接MQTT服务
+    function ez_connect(device_id) {
+        // 获取access_token
+        // access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
+        // 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
+        var access_token = getParameterByName('access_token');
+
+        document.getElementById('device_id').innerHTML = zigbee_device_short_address.toString(16);
+
+        // websocket连接
+        // wsbroker:host
+        // wsport:端口 默认1983
+        // Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
+        var wsbroker = "api.easylink.io";
+        //mqtt websocket enabled broker
+        var wsport = 1983 // port for above
+        var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 12));
+
+        // 基本参数配置
+        // 连接丢失所对应的callback函数
+        client.onConnectionLost = onConnectionLost;
+        // 消息到达所对应的callback函数
+        client.onMessageArrived = onMessageArrived;
+        // 连接成功所对应的callback函数
+        client.connect({
+            onSuccess: onConnect
+        });
+
+        // 连接成功
+        function onConnect() {
+            var subtopic = device_id + '/out/#';
+            // Once a connection has been made, make a subscription and send a message.
+            // 向某个通道发送指令
+            // topic：通道
+            // commond：指令
+            client.publish = function(topic, commond) {
+                console.log("现在执行-->:" + commond);
+                message = new Paho.MQTT.Message(commond);
+                message.destinationName = topic;
+                client.send(message);
+            }
+            console.log("device_id:" + device_id);
+            console.log("onConnect");
+            client.subscribe(subtopic, {
+                qos: 0
+            });
+        }
+
+        // 连接丢失
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0)
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+
+        // 消息到达
+        function onMessageArrived(message) {
+            // console.log(message.topic + ': ' +  message.payloadString);
+            console.log('消息到达: ' + message.payloadString);
+        }
+
+        //控制打开 led,发送什么格式????????
+        function led_on() {
+            var topic = device_id + '/in/write';
+            var message = {
+                "device_control": {
+                    "Zigbee_longAddress_H": zigbee_device_address_H,
+                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                    "Zigbee_shortAddress": zigbee_device_short_address,
+                    "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_OnOff": 1
+                }
+            };
+            message = JSON.stringify(message);
+            //var commond = '{"11":"' + 'on' + '"}';
+            console.log("led_on");
+            console.log(message);
+            client.publish(topic, message);
+        }
+
+
+        document.querySelector('#led_on').addEventListener('click', led_on);
+
+        //led off
+        function led_off() {
+            var topic = device_id + '/in/write';
+            var message = {
+                "device_control": {
+                    "Zigbee_longAddress_H": zigbee_device_address_H,
+                    "Zigbee_longAddress_L": zigbee_device_address_L,
+                    "Zigbee_shortAddress": zigbee_device_short_address,
+                    "Zigbee_deviceID": zigbee_device_id,
+                    "Zigbee_OnOff": 0
+                }
+            };
+            message = JSON.stringify(message);
+            //var commond = '{"11":"' + 'on' + '"}';
+            console.log("led_off");
+            console.log(message);
+            client.publish(topic, message);
+        }
+
+
+        document.querySelector('#led_off').addEventListener('click', led_off);
+
+    }
+
+    // 日志打印在页面的部分
+    console.log = (function(old_funct) {
+        return function(text) {
+            old_funct(text);
+        };
+    }(console.log.bind(console)));
+    console.error = console.debug = console.info = console.log;
+    </script>
+</body>
+
+</html>
