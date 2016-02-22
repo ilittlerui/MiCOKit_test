@@ -123,6 +123,10 @@
                 <ion-option-button class="button-assertive" ng-click="showPopup(item)">
                     Edit
                 </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="showPopup(item)">
+                    Delete
+                </ion-option-button>
+
             </ion-item>
         </ion-list>
     </ion-content>
@@ -234,6 +238,9 @@
                         case 260:
                             my_alisa = "Dimmer Switch";
                             break;
+                        case 0:
+                            my_alisa = "OnOff Switch";
+                            break;
                         case 261:
                             my_alisa = "Color Dimmer Switch";
                             break;
@@ -272,7 +279,6 @@
                 console.log("5");
                 //log devicelist
             } else if (msgjson.hasOwnProperty("zonestatus")) {
-
                 //alert(msgjson.zonestatus.Zigbee_endpoint);
                 //alert(msgjson.zonestatus.Zigbee_zoneStatus);
                 if (msgjson.zonestatus.Zigbee_zoneId == 1) {
@@ -286,7 +292,7 @@
                 }
                 if (msgjson.zonestatus.Zigbee_zoneId == 2) {
                     if ((msgjson.zonestatus.Zigbee_zoneStatus & 0x01) == 1)
-                        alert("贼出没！！！！！！！！！！！！！！！11");
+                        alert("贼出没！！！！！！！！！！！！！！！");
                 }
 
             } else {
