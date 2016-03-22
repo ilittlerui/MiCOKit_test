@@ -335,12 +335,30 @@
             client.publish(topic, message);
         }
 
+                function unbinding_test(){
+            var topic = device_id + '/in/write';
+            var message = {
+                "device_unbinding": {
+                    "d0L": src_ieee_addr_l,
+                    "d0H": src_ieee_addr_h,
+                    "d1L": des_ieee_addr_l,
+                    "d1H": des_ieee_addr_h,
+                }
+            };
+            message = JSON.stringify(message);
+            //var commond = '{"11":"' + 'on' + '"}';
+            console.log("binding test");
+            console.log(message);
+            client.publish(topic, message);
+        }
+
+
         //sven test
         function sven_test() {
             //var topic = device_id + '/in/write';
             //var commond = '{"11":"' + 'sven_test' + '"}';
             //client.publish(topic, commond);
-            binding_test();
+            unbinding_test();
         }
         document.querySelector('#sven_test').addEventListener('click', sven_test);
 
