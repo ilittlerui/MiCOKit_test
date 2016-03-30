@@ -314,7 +314,7 @@
         src_ieee_addr_l = 0x00F4D6B0;
         src_ieee_addr_h = 0x00158D00;
 
-        des_ieee_addr_l = 0x005E8B9F;
+        des_ieee_addr_l = 0x00F4D6F9;
         des_ieee_addr_h = 0x00158D00;
 
 
@@ -347,7 +347,7 @@
             };
             message = JSON.stringify(message);
             //var commond = '{"11":"' + 'on' + '"}';
-            console.log("binding test");
+            console.log("unbinding test");
             console.log(message);
             client.publish(topic, message);
         }
