@@ -32,8 +32,11 @@
         $scope.data = {
             showDelete: false
         };
-        $scope.des = function(){
+        $scope.remove_node = function(item){
         	alert("adsd!");
+
+        	remove_one_node();
+
         }
         $scope.listCanSwipe = true;
         $scope.showPopup = function(item) {
@@ -123,15 +126,11 @@
                 <br>
                 <span class="item-note">Address : 0x{{item.zigbee_device_short_address.toString(16)}}</span>
                 <ion-option-button class="button-assertive" ng-click="showPopup(item)">
-                    Edit
+                    Editjkjk
                 </ion-option-button>
                 <ion-option-button class="button-assertive" ng-click="des()">
                     Delete
                 </ion-option-button>
-                <ion-option-button class="button-assertive">
-                    fdf
-                </ion-option-button>
-
             </ion-item>
         </ion-list>
     </ion-content>
@@ -390,11 +389,20 @@
         }
 
 
-                function remove_device() {
+        //控制打开 led,发送什么格式????????
+        function remove_one_node() {
             var topic = device_id + '/in/write';
-            var commond = '{"11":"' + 'flashnode' + '"}';
-            console.log("flashnode");
-            client.publish(topic, commond);
+            var message = {
+                "remove_one_node": {
+                    "Zigbee_longAddress_H": 0xff,
+                    "Zigbee_longAddress_L": 0xff,
+                    "Zigbee_shortAddress": 0xff
+                }
+            };
+            message = JSON.stringify(message);
+            console.log("remove_one_node");
+            console.log(message);
+            client.publish(topic, message);
         }
 
     }
