@@ -33,9 +33,11 @@
             showDelete: false
         };
         $scope.remove_node = function(item){
-        	alert("adsd!");
 
-        	remove_one_node();
+		if(confirm("delete device")){alert("1");}
+            else{alert("2");};
+
+        	//remove_one_node();
 
         }
         $scope.listCanSwipe = true;
@@ -126,7 +128,7 @@
                 <br>
                 <span class="item-note">Address : 0x{{item.zigbee_device_short_address.toString(16)}}</span>
                 <ion-option-button class="button-assertive" ng-click="showPopup(item)">
-                    Editjkjk
+                    Edit
                 </ion-option-button>
                 <ion-option-button class="button-assertive" ng-click="des()">
                     Delete
