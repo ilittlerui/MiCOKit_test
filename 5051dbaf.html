@@ -32,7 +32,9 @@
         $scope.data = {
             showDelete: false
         };
-
+        $scope.des = function(){
+        	alert("adsd!");
+        }
         $scope.listCanSwipe = true;
         $scope.showPopup = function(item) {
             var index = $scope.items.indexOf(item);
@@ -123,7 +125,7 @@
                 <ion-option-button class="button-assertive" ng-click="showPopup(item)">
                     Edit
                 </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="alert("aaaa")">
+                <ion-option-button class="button-assertive" ng-click="des()">
                     Delete
                 </ion-option-button>
 
@@ -358,7 +360,7 @@
             //var topic = device_id + '/in/write';
             //var commond = '{"11":"' + 'sven_test' + '"}';
             //client.publish(topic, commond);
-            binding_test();
+            //binding_test();
         }
         document.querySelector('#sven_test').addEventListener('click', sven_test);
 
