@@ -183,11 +183,11 @@
         });
 
 		device_del = document.getElementById("device5150");//
-		device_del.addEventListener("touchend", function() {
+		device_del.onclick= function() {
 			alert("3");
 		//if(confirm("delete device")){alert("1");}
 		//else{alert("2");};
-		}, false);
+		};
 
         // 连接成功
         function onConnect() {
