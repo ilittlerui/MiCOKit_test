@@ -137,7 +137,7 @@
     </ion-content>
     <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
         <div class="button-bar">
-            <a class="button" style="background:white; color:black" id="led_on">Node In Flash</a>
+            <a class="button" style="background:white; color:black" id="node_flash">Node In Flash</a>
             <a class="button" style="background:black; color:white" id="sven_test">test</a>
         </div>
         <div class="button-bar">
@@ -313,15 +313,14 @@
 
         }
 
-        //led on
 
-        function led_on() {
+        function node_flash() {
             var topic = device_id + '/in/write';
             var commond = '{"11":"' + 'flashnode' + '"}';
             console.log("flashnode");
             client.publish(topic, commond);
         }
-        document.querySelector('#led_on').addEventListener('click', led_on);
+        document.querySelector('#node_flash').addEventListener('click', node_flash);
 
         src_ieee_addr_l = 0x00F4D6B0;
         src_ieee_addr_h = 0x00158D00;
